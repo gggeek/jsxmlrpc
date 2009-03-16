@@ -1,0 +1,46 @@
+<job id="getStateNameExample">
+<!--
+  Example script to take advantage of jsxmlrpc in a WSH script
+
+  @version $Id: demo_vb.wsf,v 1.1 2007/07/13 17:33:17 ggiunta Exp $
+  @author Gaetano Giunta
+  @copyright
+-->
+  <script language="JScript" src="xmlrpc_lib.js"/>
+  <script language="JScript">
+    // Stubs for object creators are apparently needed to allow invocation from VB
+    function create_xmlrpc_client(path, server, port, method)
+    {
+      return new xmlrpc_client(path, server, port, method);
+    }    
+    function create_xmlrpcmsg(meth, pars)
+    {
+      return new xmlrpcmsg(meth, pars);
+    }
+    function create_xmlrpcval(val, type)
+    {
+      return new xmlrpcval(val, type);
+    }
+    function create_xmlrpcresp(val, fcode, fstr, valtyp)
+    {
+      return new xmlrpcresp(val, fcode, fstr, valtyp);
+    }    
+  </script>
+  <script language="VBScript">
+    ' Get a state name given its number
+    stateno = 33
+    Set client = create_xmlrpc_client("http://phpxmlrpc.sourceforge.net/server.php")
+    For stateno = 1 To 51
+      Set msg = create_xmlrpcmsg("examples.getStateName")
+      msg.addParam(xmlrpc_encode(stateno))
+      'client.setDebug(2)
+      Set resp = client.send(msg)
+      If resp.faultCode() <> 0 Then
+        s = "ERROR: " & resp.faultString()
+      Else
+        s = "state nr: " & stateno & " name: " & resp.value().scalarval()
+      End If
+      WScript.Echo s
+    Next
+   </script>
+</job>

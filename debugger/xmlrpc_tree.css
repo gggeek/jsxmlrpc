@@ -1,0 +1,149 @@
+/**
+* More css formatting for xmlrpc nested trees and value editing.
+*
+* Extends tree.css, container.css from YUI lib
+*
+* @version $Id: xmlrpc_tree.css,v 1.4 2008/03/07 16:57:54 ggiunta Exp $
+* @author Gaetano Giunta
+* @copyright (c) 2007-2008 G. Giunta
+* @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+*
+* @todo fix word-wrapping of node contents for not-quite-wide-enough windows
+*/
+
+
+/* nodes for buliding a tree of xmlrpc values */
+
+.ygtvlabel, .ygtvlabelu, .ygtvlabeln, .ygtvlabelt, .ygtvlabeltu, .ygtvlabel:hover {
+  font: normal 12px verdana, sans-serif;
+  vertical-align: top;
+  margin-left:4px;
+}
+
+.ygtvlabel, .ygtvlabeln, .ygtvlabelu, .ygtvlabel:hover {
+  font-weight: bold;
+}
+
+.ygtvlabeln {
+}
+
+.ygtvlabelt {
+    color: blue;
+}
+
+.ygtvlabeltu {
+    color: red;
+}
+
+.ygtvlabelu {
+    color: red;
+}
+
+.ygtvmvup {
+	width:16px; height:22px;
+	background: url(img/expandh.gif) 3px 5px no-repeat;
+}
+
+.ygtvmvuph {
+	cursor:pointer ;
+	width:16px; height:22px;
+	background: url(img/expandon.gif) 3px 5px no-repeat;
+}
+
+.ygtvmvupn {
+	width:16px; height:22px;
+	background: url(img/expand.gif) 3px 5px no-repeat;
+}
+
+.ygtvmvdown {
+	width:16px; height:22px;
+	background: url(img/collapseh.gif) 3px 5px no-repeat;
+}
+
+.ygtvmvdownh {
+	cursor:pointer ;
+	width:16px; height:22px;
+	background: url(img/collapseon.gif) 3px 5px no-repeat;
+}
+
+.ygtvmvdownn {
+	width:16px; height:22px;
+	background: url(img/collapse.gif) 3px 5px no-repeat;
+}
+
+.ygtvmvdel {
+	width:16px; height:22px;
+	background: url(img/rm.gif) 0 0 no-repeat;
+}
+
+.ygtvmvdelh {
+	cursor:pointer ;
+	width:16px; height:22px;
+	background: url(img/rmh.gif) 0 0 no-repeat;
+}
+
+.ygtvmvdeln {
+	width:16px; height:22px;
+	/*background: url(img/rmn.gif) 0 0 no-repeat;*/
+}
+
+.ygtvmvadd {
+	width:16px; height:22px;
+	background: url(img/add.gif) 0 0 no-repeat;
+}
+
+.ygtvmvaddh {
+	cursor:pointer ;
+	width:16px; height:22px;
+	background: url(img/addh.gif) 0 0 no-repeat;
+}
+
+.ygtvmvaddn {
+	width:16px; height:22px;
+	/*background: url(img/addn.gif) 0 0 no-repeat;*/
+}
+
+.ygtvmvedit {
+	width:16px; height:22px;
+	background: url(img/edit.gif) 0 0 no-repeat;
+}
+
+.ygtvmvedith {
+	cursor:pointer ;
+	width:16px; height:22px;
+	background: url(img/edith.gif) 0 0 no-repeat;
+}
+
+.ygtvmveditn {
+	width:16px; height:22px;
+	/*background: url(img/editn.gif) 0 0 no-repeat;*/
+}
+
+/* tooltips */
+
+.tt {
+	font: 75% sans-serif;
+}
+
+.bd label {
+
+}
+
+/* panel for editing xmlrpc values */
+.bd input {
+	width: 200px;
+}
+
+.bd select {
+	width: 204px; /* pixel perfect with ff2 on win xp... */
+}
+
+.bd label {
+	display: block;
+	float: left;
+	width: 75px;
+}
+
+.bd .clear {
+	height: 5px;
+}

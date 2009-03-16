@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+/**
+ * @version $Id: debugger.html,v 1.15 2008/06/01 21:25:16 ggiunta Exp $
+ * @author Gaetano Giunta
+ * @copyright (c) 2008 G. Giunta
+ * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+ *
+ * @todo add links to documentation from every option caption
+ * @todo switch params for http compression from 0,1,2 to values to be used directly
+ * @todo add a little bit more CSS formatting: we broke IE box model getting a width > 100%...
+ * @todo add support for more options, such as ntlm auth, proxy, or request charset encoding
+ *
+ * @todo parse content of payload textarea to be fed to visual editor
+ * @todo pre-fill on body load the server / path parts
+ * @todo use global vars to set state of call before executing it
+ * @todo change js functions, adding input parameters instead of coding into them the logic tied to html elements
+ * @todo change call to switchtransport() on body onload so that type of webservice in use is preserved across reloads
+ **/
+-->
+<head>
+<title>XMLRPC Debugger</title>
+<meta name="robots" content="index,nofollow" />
+<script type="text/javascript" language="Javascript">
+  //if (window.name!='frmcontroller')
+  //  top.location.replace('index.php?run='+escape(self.location));
+    //if ($action == '')
+  //var action = 'list';
+  // relative path to the visual xmlrpc editing dialog
+  //var editorpath = '../../javascript/';
+  var host;
+  var port;
+  var path;
+  var action = ''; // 'list', 'execute', 'describe', 'wrap'
+  var method;
+  var methodpayload;
+  var methodsig;
+  var wstype = ''; // 'xmlrpc', 'jsonrpc'
+  var debuglvl = 0; // 0-2
+  var msgid = 0;
+  var protocol = ''; // 'http', 'https'
+  var username = '';
+  var password = '';
+  var authtype = 1;
+
+  var debugbuffer = '';
+  var alt_payload = '';
+</script>
+<!-- xmlrpc/jsonrpc base library -->
+<script type="text/javascript" src="xmlrpc_lib.js"></script>
+<script type="text/javascript" src="jsonrpc_lib.js"></script>
+<script type="text/javascript" src="xmlrpc_wrappers.js"></script>
+
+<style type="text/css">
+<!--
+/* header */
+html {overflow: -moz-scrollbars-vertical;}
+body {font-family: Verdana, Arial, Helvetica; font-size: 8pt; padding: 0; margin: 0;}
+#controller {background-color: #EEEEEE; padding: 0.5em;}
+#action {padding: 1em;}
+h1 {font-size: 12pt; margin: 0.5em;}
+h2 {font-size: 10pt; display: inline; vertical-align: top;}
+h3 {font-size: 10pt; border-bottom: 1px solid gray;}
+table {border: 1px solid gray; margin-bottom: 0.5em; padding: 0.25em; width: 100%;}
+#methodpayload {display: inline;}
+td {vertical-align: top; font-family: Verdana, Arial, Helvetica; font-size: 8pt;}
+.labelcell {text-align: right;}
+/* body */
+#resptbl th {background-color: navy; color: white; padding: 0.5em;}
+#resptbl td {padding: 0.5em; font-family: monospace;}
+#resptbl td form {margin: 0;}
+#response {padding: 1em; margin-top: 1em; background-color: #DDDDDD; border: 1px solid gray; white-space: pre; font-family: monospace;}
+.oddrow {background-color: #EEEEEE;}
+.evidence {color: blue;}
+#jscode { background-color: #EEEEEE; padding: 1em; margin-top: 1em; }
+#log { padding: 1em; background-color: #EEEEEE; border: 1px dashed silver; font-family: monospace;}
+#log h3 { color: red; border-bottom: none; font-size: 150%;}
+-->
+</style>
+<script language="JavaScript" type="text/javascript">
+<!--
+  function verifylibs()
+  {
+    if (typeof(xmlrpc_client) != 'function' || typeof(jsonrpc_client) != 'function')
+    {
+      //document.getElementByID('action').style.display = 'none';
+      document.getElementById('log').innerHTML = '<h3>ERROR</h3>\n'+
+'The xmlrpc_client and jsonrpc_client classes have not been loaded. '+
+'Please make sure that the files xmlrpc_lib.js and jsonrpc_lib.js are installed in '+
+'the same directory as the debugger';
+      document.frmaction.execute.disabled = true;
+    }
+    else
+    {
+      document.getElementById('log').style.display = 'none';
+    }
+  }
+
+  /// verify that user has set the necessary values, and set (some) global varsaccordingly
+  function verifyserver(anaction)
+  {
+    if (document.frmaction.host.value == '')
+    {
+      alert('Please insert a server name or address');
+      return false;
+    }
+    else
+    {
+      host = document.frmaction.host.value;
+    }
+
+    port = document.frmaction.port.value;
+
+    if (document.frmaction.path.value == '' || document.frmaction.path.value.substring(0, 1) != '/') // weird IE7 will not accept .value[0]...
+      document.frmaction.path.value = '/' + document.frmaction.path.value;
+    path = document.frmaction.path.value;
+
+    // if we have been passed an action, use it, else grab it from the form
+    // (this way we allow this method to be called from different events)
+    if (anaction === undefined)
+    {
+      action = '';
+      for (counter = 0; counter < document.frmaction.action.length; counter++)
+        if (document.frmaction.action[counter].checked)
+        {
+          action = document.frmaction.action[counter].value;
+          break;
+        }
+    }
+    else
+      action = anaction;
+
+    // we assume that the caller has already taken care of setting the method into the form
+    if (document.frmaction.method.value == '' && (action == 'execute' || action == 'wrap' || action == 'describe'))
+    {
+      alert('Please insert a method name');
+      return false;
+    }
+
+    if (action == 'list')
+    {
+      method = 'system.listMethods';
+      methodpayload = '';
+    }
+    else if (action == 'describe')
+    {
+      //method = 'system.listMethods';
+      method = document.frmaction.method.value;
+      /// @todo: use multicall to get both description and syntax of remote method
+      //alert('Not yet implemented');
+      //return false;
+    }
+    else if (action == 'wrap')
+    {
+      //method = 'system.listMethods';
+      method = document.frmaction.method.value;
+      /// @todo: use multicall to get both description and syntax of remote method
+      //alert('Not yet implemented');
+      //return false;
+    }
+    else // action = 'execute'
+    {
+      method = document.frmaction.method.value;
+      methodpayload = document.frmaction.methodpayload.value;
+    }
+
+    if (document.frmaction.authtype.value != '1' && document.frmaction.username.value == '')
+    {
+      alert('No username for authenticating to server: authentication disabled');
+    }
+    username = document.frmaction.username.value;
+    password = document.frmaction.password.value;
+    authtype = Number(document.frmaction.authtype.value);
+
+    msgid = Number(document.frmaction.id.value);
+
+    return true;
+  }
+
+  function executeaction(anaction, amethod, methodsig)
+  {
+    if (anaction === undefined)
+      anaction = action;
+    if (amethod === undefined)
+      amethod = method;
+    if (methodsig === undefined)
+      methodsig = 0;
+    if (wstype == 'jsonrpc')
+    {
+      var clientclass = jsonrpc_client;
+      var msgclass = jsonrpcmsg;
+      var protoname = 'JSONRPC';
+    }
+    else
+    {
+      var clientclass = xmlrpc_client;
+      var msgclass = xmlrpcmsg;
+      var protoname = 'XMLRPC';
+      //var client = new xmlrpc_client(path, host, port);
+      //var msg = new xmlrpcmsg(method);
+      //msg.payload = '<?xml version="1.0"?><methodCall><methodName>'+method+'<methodName><params>'+methodpayload+'</params></methodCall>';
+    }
+    //var client = new clientclass(path, host, port);
+    var msg = new msgclass(amethod);
+    if (port != "")
+    {
+      var client = new clientclass(path, host, port);
+      var server = protocol+'://'+host+':'+port+path;
+    }
+    else
+    {
+      var client = new clientclass(path, host);
+      var server = protocol+'://'+host+path;
+    }
+
+    if (username != '')
+      client.setCredentials(username, password, authtype);
+
+    client.setDebug(debuglvl);
+    /// @todo set request and response compression
+    /// @todo set cookies into client
+
+    var msg = [];
+    switch (anaction) {
+      case 'wrap':
+        // fall through intentionally....
+        var actionname = 'Wrapper function for invocation of method "' + amethod + '"';
+      case 'describe':
+        msg[0] = new msgclass('system.methodHelp', null, msgid);
+//alert(msg[0].serialize());
+//alert(var_export(msg[0]));
+        msg[0].addParam(new xmlrpcval(amethod));
+//alert(msg[0].serialize());
+//alert(var_export(msg[0]));
+        msg[1] = new msgclass('system.methodSignature', null, msgid+1);
+        msg[1].addParam(new xmlrpcval(amethod));
+//alert(msg[0].serialize());
+//alert(var_export(msg[0]));
+        var actionname = actionname ? actionname : 'Description of method "' + amethod + '"';
+        break;
+      case 'list':
+        msg[0] = new msgclass('system.listMethods', null, msgid);
+        var actionname = 'List of available methods';
+        break;
+      case 'execute':
+        //if (!payload_is_safe($payload))
+          //die("Tsk tsk tsk, please stop it or I will have to call in the cops!");
+        msg[0] = new msgclass(amethod, null, msgid);
+        // hack! build xml payload by hand
+        if (wstype == 'jsonrpc')
+          msg[0].payload = "{\n" +
+            '"method": "' + amethod + "\",\n\"params\": [" +
+            methodpayload +
+            "\n],\n\"id\": " + msgid + "\n}";
+        else
+          msg[0].payload = msg[0].xml_header() +
+            '<methodName>' + amethod + "</methodName>\n<params>" +
+            methodpayload +
+            "</params>\n" + msg[0].xml_footer();
+        var actionname = 'Execution of method ' + amethod;
+        break;
+      default: // give a warning
+        var actionname = '[ERROR: unknown action] "' + anaction + '"';
+    }
+
+    document.getElementById('actiontitle').innerHTML = htmlentities(actionname)+' on server '+htmlentities(server, 0)+" ...";
+    //outdiv.innerHTML = '<h2>'+htmlentities(actionname)+' on server '+htmlentities(server)+" ...</h2>\n";
+    // reset log window
+    var outdiv = document.getElementById('results');
+    outdiv.innerHTML = '';
+    if (debuglvl > 0)
+    {
+      document.getElementById("log").style.display = 'block';
+      document.getElementById("log").innerHTML = '<h2>Debug info:</h2>\n';
+    }
+    else
+    {
+      document.getElementById("log").style.display = 'none';
+      document.getElementById('log').innerHTML = '';
+    }
+
+    var response = null;
+    var resp = [];
+    var mtime = new Date().getTime();
+    for (var i = 0; i < msg.length; i++)
+    {
+      response = client.send(msg[i], 0, protocol);
+      resp[resp.length] = response;
+      if (response.faultCode() != 0)
+        break;
+    }
+    mtime = (new Date().getTime() - mtime) / 1000;
+
+    if (response.faultCode() != 0)
+    {
+      outdiv.innerHTML += "<h3>" + wstype + " call FAILED!</h3>\n";
+      outdiv.innerHTML += "<p>Fault code: [" + htmlentities(response.faultCode(), 0) +
+        "] Reason: '" + htmlentities(response.faultString(), 0) + "'</p>\n";
+      //document.getElem6entById('action').innerHTML += strftime("%d/%b/%Y:%H:%M:%S\n");
+      outdiv.innerHTML += new Date().toLocaleString() + "\n";
+    }
+    else
+    {
+      //printf ("<h3>%s call(s) OK (%.2f secs.)</h3>\n", $protoname, $time);
+      var astring = "<h3>" + wstype + " call(s) OK (" + mtime.toFixed(2) + " secs.)</h3>\n";
+      //echo (strftime("%d/%b/%Y:%H:%M:%S\n"));
+      astring += new Date().toLocaleString() + "\n";
+      switch (anaction)
+      {
+        case 'list':
+
+        var v = response.value();
+        var max = v.arraySize();
+        astring += "<table id=\"resptbl\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+        astring += "<thead>\n<tr><th>Method</th><th>Description</th></tr>\n</thead>\n<tbody>\n";
+        var rec, cssclass;
+        for(i = 0; i < max; i++)
+        {
+          rec = v.arrayMem(i);
+          if (i%2) cssclass=' class="oddrow"'; else cssclass = ' class="evenrow"';
+          astring += "<tr><td"+cssclass+">" + htmlentities(rec.scalarVal(), 0) + "</td>";
+          astring += "<td"+cssclass+"><form action=\"\" method=\"get\">";
+          astring += "<input type=\"submit\" value=\"Describe\" onclick=\"setaction('describe', '" + htmlentities(rec.scalarVal()) + "'); if (verifyserver('describe')) executeaction('describe', '" + htmlentities(rec.scalarVal()) + "'); return false;\" />" ;
+          astring += "</form></td>";
+          astring += "</tr>\n";
+        }
+        astring += "</tbody>\n</table>";
+        outdiv.innerHTML = astring;
+
+          break;
+          case 'describe':
+
+        var r1 = resp[0].value();
+        var r2 = resp[1].value();
+
+        astring += "<table id=\"resptbl\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+        astring += "<thead>\n<tr><th>Method</th><th>" + htmlentities(amethod, 0) + "</th><th>&nbsp;</th><th>&nbsp;</th></tr>\n</thead>\n<tbody>\n";
+        var desc = htmlentities(r1.scalarVal(), 0);
+        if (desc == "")
+          desc = "-";
+        astring += "<tr><td class=\"evenrow\">Description</td><td colspan=\"3\" class=\"evenrow\">"+desc+"</td></tr>\n";
+        var payload = "";
+        alt_payload = "";
+        if (r2.kindOf() != "array")
+          astring += "<tr><td class=\"oddrow\">Signature</td><td class=\"oddrow\">Unknown</td><td class=\"oddrow\">&nbsp;</td></tr>\n";
+        else
+        {
+          var cssclass, ret, x, y;
+          for(i = 0; i < r2.arraySize(); ++i)
+          {
+            if (i%2) cssclass=' class="evenrow"'; else cssclass = ' class="oddrow"';
+            astring += "<tr><td"+cssclass+">Signature&nbsp;" + (i+1) + "</td><td"+cssclass+">";
+            x = r2.arrayMem(i);
+            ret = x.arrayMem(0);
+            astring += "<code>OUT:&nbsp;" + htmlentities(ret.scalarVal(), 0) + "<br />IN: (";
+            if (x.arraySize() > 1)
+            {
+              for(var k = 1; k < x.arraySize(); ++k)
+              {
+                y = x.arrayMem(k);
+                astring += y.scalarVal();
+                if (wstype == 'xmlrpc')
+                {
+                  payload = payload + '<param><value><'+htmlentities(y.scalarVal())+'></'+htmlentities(y.scalarVal())+"></value></param>\n";
+                }
+                alt_payload += y.scalarVal();
+                if (k < x.arraySize()-1)
+                {
+                  alt_payload += ';';
+                  astring += ", ";
+                }
+              }
+            }
+            astring += ")</code></td>";
+            //bottone per testare questo metodo
+            //$payload="<methodCall>\n<methodName>$method</methodName>\n<params>\n$payload</params>\n</methodCall>";
+            astring += "<td"+cssclass+"><form action=\"\" method=\"get\">";
+            if (wstype == 'xmlrpc')
+              astring += "<input type=\"submit\" value=\"Load method synopsis\" onclick=\"setaction('execute', '" + amethod + "', '" + base64_encode(payload) + "'); return false;\" />";
+            astring += "</form></td>\n";
+
+            astring += "<td"+cssclass+"><form action=\"\" method=\"get\">";
+            astring += "<input type=\"submit\" value=\"Generate method call stub code\" onclick=\"setaction('wrap', '" + amethod + "', ''); executeaction('wrap', '" + amethod + "', " + i + "); return false;\"/>";
+            astring += "</form></td></tr>\n";
+
+          }
+        }
+        astring += "</tbody>\n</table>";
+
+        outdiv.innerHTML = astring;
+
+          break;
+          case 'wrap':
+
+        var r1 = resp[0].value();
+        var r2 = resp[1].value();
+        if (r2.kindOf() != "array" || r2.arraySize() <= methodsig)
+          alert("Error: signature unknown");
+        else
+        {
+          var mdesc = r1.scalarVal();
+          var msig = xmlrpc_decode(r2);
+          msig = msig[methodsig];
+          var timeout = 0;
+          var opts = 0; /// @todo discern case where it shuold be set to 1
+          var code = build_remote_method_wrapper_code(client, amethod, wstype+'_'+amethod.replace(/\./, '_'), msig, mdesc, timeout, protocol, opts, wstype);
+          if (code)
+          {
+            //echo "<div id=\"phpcode\">\n";
+            //highlight_string("<?php\n".$code['docstring'].$code['source'].'?>');
+            //echo "\n</div>";
+            outdiv.innerHTML += '<div id="jscode"><pre>' + htmlentities(code['docstring'], 0) + htmlentities(code['source'], 0) + '</pre></div>';
+          }
+          else
+          {
+            alert('Error while building javascript code stub...');
+          }
+        }
+
+          break;
+          case 'execute':
+
+        outdiv.innerHTML += '<div id="response"><h2>Response:</h2>'+htmlentities(response.serialize(), 0)+'</div>';
+        break;
+
+          default: // give a warning
+      }
+    }
+  }
+
+  // set an action into the form controls
+  function setaction(anaction, amethod, apayload)
+  {
+    if (amethod !== undefined)
+      document.frmaction.method.value = amethod;
+    if (apayload !== undefined)
+      document.frmaction.methodpayload.value = base64_decode(apayload);
+    switch(anaction)
+    {
+      case 'execute':
+        document.frmaction.method.disabled = false;
+        document.frmaction.methodpayload.disabled = false;
+        document.frmaction.action[2].checked = true;
+        document.frmaction.methodpayload.rows = 10;
+        displaydialogeditorbtn(true);
+        break;
+      case 'describe':
+      case 'wrap':
+        document.frmaction.method.disabled = false;
+        document.frmaction.methodpayload.disabled = true;
+        if (anaction == 'wrap')
+          document.frmaction.action[3].checked = true;
+        else
+          document.frmaction.action[1].checked = true;
+        document.frmaction.methodpayload.rows = 1;
+        displaydialogeditorbtn(false);
+        break;
+      case 'list':
+        document.frmaction.method.disabled = true;
+        document.frmaction.methodpayload.disabled = true;
+        document.frmaction.action[0].checked = true;
+        document.frmaction.methodpayload.rows = 1;
+        displaydialogeditorbtn(false);
+        break;
+    }
+  }
+
+  function switchaction()
+  {
+    // reset html layout depending on action to be taken
+    //var action = '';
+    for (counter = 0; counter < document.frmaction.action.length; counter++)
+      if (document.frmaction.action[counter].checked)
+      {
+        action = document.frmaction.action[counter].value;
+      }
+    if (action == 'execute')
+    {
+      document.frmaction.methodpayload.disabled = false;
+      displaydialogeditorbtn(true);//if (document.getElementById('methodpayloadbtn') != undefined) document.getElementById('methodpayloadbtn').disabled = false;
+      document.frmaction.method.disabled = false;
+      document.frmaction.methodpayload.rows = 10;
+    }
+    else
+    {
+      document.frmaction.methodpayload.rows = 1;
+      if (action == 'describe' || action == 'wrap')
+      {
+        document.frmaction.methodpayload.disabled = true;
+        displaydialogeditorbtn(false); //if (document.getElementById('methodpayloadbtn') != undefined) document.getElementById('methodpayloadbtn').disabled = true;
+        document.frmaction.method.disabled = false;
+      }
+      else // list
+      {
+        document.frmaction.methodpayload.disabled = true;
+        displaydialogeditorbtn(false); //if (document.getElementById('methodpayloadbtn') != undefined) document.getElementById('methodpayloadbtn').disabled = false;
+        document.frmaction.method.disabled = true;
+      }
+    }
+  }
+
+  function switchdebug()
+  {
+    debuglvl = document.frmaction.debug.value;
+  }
+
+  function switchprotocol()
+  {
+    if (document.frmaction.protocol.value == '2')
+      protocol = 'https';
+    else
+      protocol = 'http';
+  }
+
+/*
+  function switchssl()
+  {
+    if (document.frmaction.protocol.value != '2')
+    {
+      document.frmaction.verifypeer.disabled = true;
+      document.frmaction.verifyhost.disabled = true;
+      document.frmaction.cainfo.disabled = true;
+    }
+    else
+    {
+      document.frmaction.verifypeer.disabled = false;
+      document.frmaction.verifyhost.disabled = false;
+      document.frmaction.cainfo.disabled = false;
+    }
+  }
+
+  function switchauth()
+  {
+    if (document.frmaction.protocol.value != '0')
+    {
+      document.frmaction.authtype.disabled = false;
+    }
+    else
+    {
+      document.frmaction.authtype.disabled = true;
+      document.frmaction.authtype.value = 1;
+    }
+  }
+
+  function swicthcainfo()
+  {
+    if (document.frmaction.verifypeer.checked == true)
+    {
+      document.frmaction.cainfo.disabled = false;
+    }
+    else
+    {
+      document.frmaction.cainfo.disabled = true;
+    }
+  }
+*/
+  // change type of webservice method to be called, from xmlrpc to jsonrpc and viceversa
+  function switchtransport(is_json)
+  {
+    if (is_json == 0)
+    {
+      document.getElementById("idcell").style.visibility = 'hidden';
+      document.frmjsonrpc.yes.checked = false;
+      document.frmxmlrpc.yes.checked = true;
+      //document.frmaction.wstype.value="0";
+      wstype = 'xmlrpc';
+    }
+    else
+    {
+      document.getElementById("idcell").style.visibility = 'visible';
+      document.frmjsonrpc.yes.checked = true;
+      document.frmxmlrpc.yes.checked = false;
+      //document.frmaction.wstype.value="1";
+      wstype = 'jsonrpc';
+    }
+  }
+
+  // only display link to dialog for visual editing of parameters if the appropriate mode is set
+  function displaydialogeditorbtn(show)
+  {
+    if (show && ((typeof base64_decode) == 'function'))
+    {
+      document.getElementById('methodpayloadbtn').innerHTML = '[<a href="#" onclick="activateeditor(); return false;">Edit</a>]';
+    }
+    else
+    {
+      document.getElementById('methodpayloadbtn').innerHTML = '';
+    }
+  }
+
+  // open dialog box for visual editing of payload parameters
+  function activateeditor()
+  {
+      var url = 'visualeditor.html?type=' + wstype;
+      if (alt_payload != '')
+        url += '&params=' + alt_payload;
+      if (wstype == "jsonrpc")
+        url += '&type=jsonrpc';
+      var wnd = window.open(url, '_blank', 'width=750, height=400, location=0, resizable=1, menubar=0, scrollbars=1');
+  }
+
+  // if javascript version of the lib is found, allow it to send us params for payload textarea
+  function buildparams(base64data)
+  {
+    if (typeof base64_decode == 'function')
+    {
+      if (base64data == '0') // workaround for bug in base64_encode...
+        document.getElementById('methodpayload').value = '';
+      else
+        document.getElementById('methodpayload').value = base64_decode(base64data);
+    }
+  }
+
+  function xmlrpc_debug_log_handler(data) {
+    document.getElementById('log').innerHTML += data + '<br/>';
+  }
+//-->
+</script>
+</head>
+<body onload="switchtransport(0); switchaction(); switchprotocol(); verifylibs();">
+
+<div id="controller">
+<h1>XMLRPC <form name="frmxmlrpc" style="display: inline;" action="."><input name="yes" type="radio" onclick="switchtransport(0);"/></form>
+/<form name="frmjsonrpc" style="display: inline;" action="."><input name="yes" type="radio" onclick="switchtransport(1);"/></form>JSONRPC Debugger (based on the <a href="http://phpxmlrpc.sourceforge.net/jsxmlrpc/">JS-XMLRPC</a> library)</h1>
+<noscript>
+WARNING: this page is completely useless without javascript support.<br />Please use a javascript-enabled browser
+</noscript>
+<form name="frmaction" method="get" action="">
+
+<table id="serverblock">
+<tr>
+<td><h2>Target server</h2></td>
+<td class="labelcell">Address:</td><td><input type="text" name="host" value="" /></td>
+<td class="labelcell">Port:</td><td><input type="text" name="port" value="" size="5" maxlength="5" /></td>
+<td class="labelcell">Path:</td><td><input type="text" name="path" value="" /></td>
+</tr>
+</table>
+
+<table id="actionblock">
+<tr>
+<td><h2>Action</h2></td>
+<td>List available methods<input type="radio" name="action" value="list" checked="checked" onclick="switchaction();" /></td>
+<td>Describe method<input type="radio" name="action" value="describe" onclick="switchaction();" /></td>
+<td>Execute method<input type="radio" name="action" value="execute" onclick="switchaction();" /></td>
+<td>Generate stub for method call<input type="radio" name="action" value="wrap" onclick="switchaction();" /></td>
+</tr>
+</table>
+<!--<input type="hidden" name="methodsig" value="" />-->
+
+<table id="methodblock">
+<tr>
+<td><h2>Method</h2></td>
+<td class="labelcell">Name:</td><td><input type="text" name="method" value="" /></td>
+<td class="labelcell">Payload:<br/><div id="methodpayloadbtn"></div></td><td><textarea id="methodpayload" name="methodpayload" rows="1" cols="40"></textarea></td>
+<td class="labelcell" id="idcell">Msg id: <input type="text" name="id" size="3" value=""/></td>
+<td><!--<input type="hidden" name="wstype" value="0" />-->
+<input type="submit" name="execute" value="Execute" onclick="if (verifyserver()) executeaction(); return false;"/></td>
+</tr>
+</table>
+
+<table id="optionsblock">
+<tr>
+<td><h2>Client options</h2></td>
+<td class="labelcell">Show debug info:</td><td><select name="debug" onchange="switchdebug();">
+<option value="0" selected="selected">No</option>
+<option value="1">Yes</option>
+<option value="2">More</option>
+</select>
+</td>
+<td class="labelcell">Timeout:</td><td><input type="text" name="timeout" size="3" value="" disabled="disabled" /></td>
+<td class="labelcell">Protocol:</td><td><select name="protocol" onchange="switchprotocol();"><!--onclick="switchssl(); switchauth(); swicthcainfo();">-->
+<option value="0" selected="selected">HTTP</option>
+<!--<option value="1">HTTP 1.1</option>-->
+<option value="2">HTTPS</option>
+</select></td>
+</tr>
+<tr>
+<td class="labelcell">AUTH:</td>
+<td class="labelcell">Username:</td><td><input type="text" name="username" value="" /></td>
+<td class="labelcell">Pwd:</td><td><input type="password" name="password" value="" /></td>
+<td class="labelcell">Type</td><td><select name="authtype">
+<option value="1" selected="selected">Basic</option>
+<!--<option value="2">Digest</option>
+<option value="8">NTLM</option>-->
+</select></td>
+<td></td>
+</tr>
+<!--
+<tr>
+<td class="labelcell">SSL:</td>
+<td class="labelcell">Verify Host's CN:</td><td><select name="verifyhost">
+<option value="0" selected="selected">No</option>
+<option value="1">Check CN existance</option>
+<option value="2">Check CN match</option>
+</select></td>
+<td class="labelcell">Verify Cert:</td><td><input type="checkbox" value="1" name="verifypeer" onclick="swicthcainfo();" /></td>
+<td class="labelcell">CA Cert file:</td><td><input type="text" name="cainfo" value="" /></td>
+</tr>
+<tr>
+<td class="labelcell">PROXY:</td>
+<td class="labelcell">Server:</td><td><input type="text" name="proxy" value="" /></td>
+<td class="labelcell">Proxy user:</td><td><input type="text" name="proxyuser" value="" /></td>
+<td class="labelcell">Proxy pwd:</td><td><input type="password" name="proxypwd" value="" /></td>
+</tr>
+-->
+<tr>
+<td class="labelcell">COMPRESSION:</td>
+<td class="labelcell">Request:</td><td><select name="requestcompression" disabled="disabled">
+<option value="0" selected="selected">None</option>
+<option value="1">Gzip</option>
+<option value="2">Deflate</option>
+</select></td>
+<td class="labelcell">Response:</td><td><select name="responsecompression">
+<option value="0" selected="selected">None</option>
+<option value="1">Gzip</option>
+<option value="2">Deflate</option>
+<option value="3">Any</option>
+</select></td>
+<td></td>
+</tr>
+<tr>
+<td class="labelcell">COOKIES:</td>
+<td colspan="4" class="labelcell"><input type="text" name="clientcookies" size="80" value=""  disabled="disabled" /></td>
+<td colspan="2">Format: 'cookie1=value1, cookie2=value2'</td>
+</tr>
+</table>
+
+</form>
+</div>
+
+<div id="action">
+<h3 id="actiontitle">Instructions on usage of the debugger:</h3>
+<div id="log"></div>
+<div id="results">
+<ol>
+<li>Run a 'list available methods' action against desired server</li>
+<li>If list of methods appears, click on 'describe method' for desired method</li>
+<li>To run method: click on 'load method synopsis' for desired method. This will load a skeleton for method call parameters in the form above. Complete all xmlrpc values with appropriate data and click 'Execute'</li>
+</ol>
+
+<h3>Example:</h3>
+<p>
+Server Address: localhost<br/>
+Path: /debugger.html
+</p>
+
+<h3>Notice:</h3>
+<p>all usernames and passwords entered on the above form will be written to the web server logs of this server. Use with care.</p>
+
+<h3>Changelog</h3>
+<ul>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

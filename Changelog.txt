@@ -1,0 +1,261 @@
+2008/03/07 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * improve Makefile for windows xp
+
+ * update copyright notices to year 2008
+
+ * update yui to version 2.5.0
+
+2007/09/24 - G. Giunta (giunta.gaetano@gmail.com) thanks James Pritchard
+
+ * fix a bug in error log handler when using firefox+firebug
+
+ * fix an error in the javadoc documentation
+
+2007/07/13 - G. Giunta (giunta.gaetano@gmail.com) thanks Michele Locati
+
+ * fix a bug in xmlrpc_decode with structs
+
+ * fix a bug in parsing cookie headers in http responses
+
+ * added two demo files, for WSH and VB
+
+2007/07/11 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * allow lib to work in Windows Scripting Host environments
+
+2007/06/26 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * doc/Makefile: improve packaging of javadocs
+
+ * tagged and released as version 0.3
+
+2007/06/25 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * fix calls failing on Safari when port is not specified in server url, plus
+   another minor Safari fix (change order in which http headers are set)
+
+2007/06/23 - G. Giunta (giunta.gaetano@gmail.com), thanks Bob Langley
+
+ * fix decoding of structs using xmlrpc_decode
+
+2007/06/10 - G. Giunta (giunta.gaetano@gmail.com), thanks Firebug
+
+ * fix name of function iso8601_decode (was is08601_decode)
+
+ * remove an extraneous 'port' var from global scope
+
+ * take advantage of firebug console for logging if it is available
+
+2007/06/05 - G. Giunta (giunta.gaetano@gmail.com), thanks to Vito Covito
+
+ * fix error messages when decoding invalid xmlrpc types
+
+ * fix parsing of boolean values
+
+2007/06/04 - G. Giunta (giunta.gaetano@gmail.com), thanks to Vito Covito
+
+ * fix serialization of struct members (was using 'element' instead of 'member')
+
+ * fix handling of client return type in async calls without a specific timeout
+
+2007/05/21 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * fix parsing of dateTime values
+
+2007/05/12 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_wrappers.js: allow wrapping functions to be called without the
+   extra_options parameters
+ 
+2007/05/01 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_wrappers.js: add new function: wrap_xmlrpc_server; fix two bugs in
+   function wrap_xmlrpc_method
+
+2007/04/25 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * sync yui components with upstream release 2.2.2
+
+ * doc/makefile: add xmlrpc_wrappers to generated api docs
+
+ * doc/xmlrpc_js.xml:various upates to the manual
+
+ * debugger.html: fix title of action panel when calling remote methods
+
+ * bumped version number to 0.2, tagged and released
+
+2007/04/08 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_lib.js: let base64_decode('') work on non-firefox browsers; minor
+   bugfixes; allow htmlentities to not escape quotes (add 2nd optional param)
+
+ * debugger.html: fix generation of stub code for remote methods
+
+2007/04/08 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_wrappers.js: implement wrapping of remote methods
+
+ * xmlrpc_lib.js: improve new xmlrpcmsg('http://srv/path') on IE; fix var_export
+   to emit code that is closer to real javascript than real php
+
+ * Makefile: recover lib version from source instead of having it hardcoded
+
+ * doc/Makefile: improve xslt tranform to html; add pdf generation with fop
+
+2007/04/07 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_lib.js: added async calls; better error msgs for http error cases
+
+2007/03/09 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * debugger.html: css improvements for IE
+
+ * Makefile: added call to produce a minified version of the library by usage of jsmin.php
+
+ * added / updated license info to most files
+
+2007/03/04 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * Makefile, doc/makefile: add new target 'doc', add command for parsing javadoc
+   via JsDoc.pl, introduce dependencies, do not run dos2unix on gifs
+
+ * xmlrpc_lib.js: change version nr. to 0.2dev
+
+ * yui/*: updated to yui 2.2.0 + a single custom patch for IE 7 and focus()
+
+2007/03/03 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_lib.js, jsonrpc_lib.js: cleanup and completion of javadoc comments
+
+2007/02/25 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * updated the documentation
+
+ * added to docs/makefile the command to invoke xxe for generating docs, css
+   files for direct viewing of xml content in opera, firefox
+
+ * better rendering of docs in xml+css format for function prototypes
+
+ * debugger: if the xmlrpc_lib.js and jsopnrpc_lib.js files are not correctly
+   included, print an error message and disable the execute button
+
+ * tagged and released as ver. 0.1
+
+2007/02/20 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * fixes to makefile, added Makefile for docs directory
+
+ * added NEWS and README files
+
+2007/02/15 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * jsonrpc_lib.js: fix content-type set when sending jsonrpc requests
+
+2007/02/07 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * jsonrpc_lib.js: implement jsonrpc_decode, jsonrpc_decode_json
+
+ * xmlrpc_lib.js: remove a spurious $ char ported over from php; fix detection
+   of debug info sent by the server (avoid problems with base64 decoding on ff)
+
+2007/02/05 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * jsonrpc_lib.js: implement parsing of json responses; jsonrpc_encode()
+
+ * debugger.html: support for jsonrpc calls
+
+2007/01/28 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * visualeditor.html: moved css to an external file
+
+ * added Makefile
+
+2007/01/27 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * visualeditor.php: moved css to an external file
+
+ * xmlrpc_lib.js: allow "new xmlrpc_client('http://a.server/adress')"
+
+2007/01/22 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * debugger.html: many improvements; preliminary support for js code generation
+
+ * added new file xmlrpc_wrappers.js
+
+ * xmlrpc_lib.js: fix setting of username/password for basic auth; fix error msg
+   in one case
+
+2007/01/20 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * debugger.html: add support for visual editor of values (pure js version)
+
+ * yui components: upgraded all components used to version 0.12.2
+
+2007/01/19 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * debugger.html: add support for generating method payload stub
+
+2007/01/13 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_lib.js: add support for parsing of http request headers; rename and
+   enhance output functions xmlrpc_debug_log and xmlrpc_error_log
+
+ * debugger.html: add support for debug output
+
+2007/01/11 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_lib.js: add support for client::multicall(); more javadoc-style documentation
+
+2007/01/10 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_display.js, visualeditor.php: force user to pick a value immediately
+   for new parameters instead of adding first UNDEF parameters and having them
+   edited in a second moment (streamlined common operations)
+
+ * xmlrpc_display.js: accept as valid struct elements with an empty name (can be
+   optionally disabled)
+
+ * visualeditor.php: hide editing buttons of values while previewing results;
+   better handling of huge preview dialogs; modify page layout; fix css class
+   of params added by user; xhtml compliance fixes
+
+2007/01/06 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * xmlrpc_display.js: use a different css style for value of element when the
+   element type has been set but the value is null; allow adding of bool elements
+   in jsonrpc mode; fix handler of enter key in editing dlg
+
+ * visualeditor.php: accept list of default params without case sensitivity
+
+ * jsonrpc_lib.js: allow the serialization of an int jsonrpcval initialized with
+   a null value
+
+2007/01/05 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * visualeditor.php: when specifying an int parameter via url params, a double
+   value is created instead of an undef for json mode; fix bug in serializing
+   topmost values after changing their type (eg. string -> array)
+
+ * xmlrpc_display.js: show edit box for value editing disabled when editing
+   values of type NULL in jsonrpc mode
+
+2006/12/27 - G. Giunta (giunta.gaetano@gmail.com)
+
+ * yui components: upgraded all components used to version 0.12.1 + added a
+   bugfix for focusing an hidden element on IE7 (in container.js line 3903)
+
+ * xmlrpc_lib.js: fix creation of xml for array values (end elements were wrong)
+
+ * xmlrpc_display.js: use a spacer div instead of &#160; for tree layout (better
+   results on mouse drag-selection); respect the new nowrap node property; fixed
+   usage of a fixed div name for showing the confirm dialog for node deletion;
+   made add/edit dialog modal to prevent errors if user shuffles nodes around
+   while editing/adding a node; when editing values of type 'undef' do not
+   pre-fill edit box with 'null' string
+
+ * visualeditor.php: rendering fixes for IE7; instead of a js alert, use a yui
+   dialog for preview, so that xml code can be copy+pasted; for jsonrpc values,
+   removed trailing comma in serialization
+
+ * jsonrpc_lib.js: allow json_encode_entities to work when passed a null value
