@@ -1,3 +1,11 @@
+2009/09/05 - G. Giunta (giunta.gaetano@gmail.com)
+
+* xmlrpc_lib.js: added method setUserCredentials to xmlrpc_client, as parent lib does;
+  added support for the <ex:nil/> from the apache library, both in input and output
+  (output regulated by the xmlrpc_null_apache_encoding variable, input by the
+  xmlrpc_null_extension one);
+  base64_decode now trims whitespace
+
 2008/03/07 - G. Giunta (giunta.gaetano@gmail.com)
 
  * improve Makefile for windows xp
