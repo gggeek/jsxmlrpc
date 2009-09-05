@@ -1,4 +1,4 @@
-2009/09/05 - G. Giunta (giunta.gaetano@gmail.com)
+2009/09/05 - G. Giunta (giunta.gaetano@gmail.com) thanks Geoff Chessire
 
 * xmlrpc_lib.js: added method setUserCredentials to xmlrpc_client, as parent lib does;
   added support for the <ex:nil/> from the apache library, both in input and output
