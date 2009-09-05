@@ -4,6 +4,13 @@
 
 WEB=/var/www/jsxmlrpc/doc
 
+MKDIR=mkdir
+
+PHP=php
+
+FOP=fop
+
+JSDOC=jsdoc.pl
 
 #### DO NOT TOUCH FROM HERE ONWARDS ###
 
@@ -22,21 +29,21 @@ doc: out/index.html jsxmlrpc.pdf js_docs_out/index.html
 out/index.html jsxmlrpc.pdf: xmlrpc_js.xml 
 	-${MKDIR} out
 	-rm -rf out/*
-	# custom php script that does the xslt magic
+# custom php script that does the xslt magic
 	${PHP} convert.php xmlrpc_js.xml custom.xsl out/
-	# fix link to api in html docs
-	sed -e 's/href=\"???\"/href=\"api\/index.html\"/' out/ch07.html > out/ch07b.html && cp -f out/ch07b.html out/ch07.html && rm out/ch07b.html
+# fix link to api in html docs
+#	sed -e 's/href=\"???\"/href=\"api\/index.html\"/' out/ch07.html > out/ch07b.html && cp -f out/ch07b.html out/ch07.html && rm out/ch07b.html
 	
-	# convert to fo and then to pdf using apache fop
+# convert to fo and then to pdf using apache fop
 	${PHP} convert.php xmlrpc_js.xml custom.fo.xsl xmlrpc_js.fo.xml
-	fop xmlrpc_js.fo.xml jsxmlrpc.pdf
-	#-rm xmlrpc_js.fo.xml
+	${FOP} xmlrpc_js.fo.xml jsxmlrpc.pdf
+#-rm xmlrpc_js.fo.xml
 
-js_docs_out/index.html: ../xmlrpc_lib.js ../jsonrpc_lib.js
+js_docs_out/index.html: ../lib/xmlrpc_lib.js ../lib/jsonrpc_lib.js
 	-${MKDIR} js_docs_out
 	-rm -rf js_docs_out/*
-	# command for jsdoc javadoc parser for javascript
-	jsdoc.pl --project-name=js-xmlrpc ../xmlrpc_lib.js ../jsonrpc_lib.js ../xmlrpc_wrappers.js
+# command for jsdoc javadoc parser for javascript
+	${JSDOC} --project-name=js-xmlrpc ../lib/xmlrpc_lib.js ../lib/jsonrpc_lib.js ../lib/xmlrpc_wrappers.js
 
 dist: doc
 	${MKDIR} -p ../jsxmlrpc-${VERSION}/doc
@@ -45,7 +52,7 @@ dist: doc
 	cp xmlrpc_js.xml ../jsxmlrpc-${VERSION}/doc
 	-cp jsxmlrpc.pdf ../jsxmlrpc-${VERSION}/doc
 	cp Makefile ../jsxmlrpc-${VERSION}/doc
-	# jsdocs
+# jsdocs
 	${MKDIR} -p ../jsxmlrpc-${VERSION}/doc/api
 	-cp js_docs_out/*.html ../jsxmlrpc-${VERSION}/doc/api
 	-cp js_docs_out/*.css ../jsxmlrpc-${VERSION}/doc/api

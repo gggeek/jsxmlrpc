@@ -12,14 +12,16 @@ JSINCLUDEDIR=/usr/local/apache2/htdocs
 # mkdir is a thorny beast under windows: make sure we can not use the cmd version, running eg. "make MKDIR=mkdir.exe"
 MKDIR=mkdir
 
+#find too
+FIND=find
 
 #### DO NOT TOUCH FROM HERE ONWARDS ###
 
 # recover version number from code
 # thanks to Firman Pribadi for unix command line help
-export VERSION=$(shell egrep "var *xmlrpcVersion *= *'" xmlrpc_lib.js | sed -r s/"(.*= *' *)([0-9a-zA-Z.-]+)(.*)"/\\2/g )
+export VERSION=$(shell egrep "var *xmlrpcVersion *= *'" lib/xmlrpc_lib.js | sed -r s/"(.*= *' *)([0-9a-zA-Z.-]+)(.*)"/\2/g )
 
-LIBFILES=xmlrpc_lib.js jsonrpc_lib.js xmlrpc_wrappers.js
+LIBFILES=lib/xmlrpc_lib.js lib/jsonrpc_lib.js lib/xmlrpc_wrappers.js
 
 #EXTRAFILES=test.pl \
 # test.py \
@@ -57,16 +59,16 @@ INFOFILES=Changelog.txt \
  NEWS \
  README
 
-DEBUGGERFILES=debugger.html \
- visualeditor.html \
- visualeditor.css \
- xmlrpc_display.js \
- xmlrpc_tree.css \
- container.css \
- logger.css \
- tree.css \
- yui/*.js \
- img/*.gif*
+DEBUGGERFILES=debugger/debugger.html \
+ debugger/visualeditor.html \
+ debugger/visualeditor.css \
+ debugger/xmlrpc_display.js \
+ debugger/xmlrpc_tree.css \
+ debugger/container.css \
+ debugger/logger.css \
+ debugger/tree.css \
+ debugger/yui/*.js \
+ debugger/img/*.gif*
  
 
 all: install
@@ -89,16 +91,17 @@ jsxmlrpc-${VERSION}.tar.gz jsxmlrpc-${VERSION}.zip: ${LIBFILES} ${DEBUGGERFILES}
 	rm -rf jsxmlrpc-${VERSION}
 	${MKDIR} jsxmlrpc-${VERSION}
 	${MKDIR} jsxmlrpc-${VERSION}/lib
-	cp --parents ${LIBFILES} jsxmlrpc-${VERSION}/lib
+	cp --parents ${LIBFILES} jsxmlrpc-${VERSION}
 	${PHP} minify.php ${LIBFILES} > jsxmlrpc-${VERSION}/lib/jsxmlrpc-min.js
 	${MKDIR} jsxmlrpc-${VERSION}/debugger
 	${MKDIR} jsxmlrpc-${VERSION}/debugger/img
 	${MKDIR} jsxmlrpc-${VERSION}/debugger/yui
-	cp --parents ${DEBUGGERFILES} jsxmlrpc-${VERSION}/debugger
+	cp --parents ${DEBUGGERFILES} jsxmlrpc-${VERSION}
 	cp ${INFOFILES} jsxmlrpc-${VERSION}
 	cd doc && $(MAKE) dist
-	find jsxmlrpc-${VERSION} -type f ! -name "*.gif" ! -name "*.pdf" -exec dos2unix {} \;
-	-rm jsxmlrpc-${VERSION}.tar.gz jsxmlrpc-${VERSION}.zip
+#   on unix shells last char should be \;
+	${FIND} jsxmlrpc-${VERSION} -type f ! -name "*.gif" ! -name "*.pdf" -exec dos2unix {} ;
+	-rm jsxmlrpc-${VERSION}.zip jsxmlrpc-${VERSION}.tar.gz
 	tar -cvf jsxmlrpc-${VERSION}.tar jsxmlrpc-${VERSION}
 	gzip jsxmlrpc-${VERSION}.tar
 	zip -r jsxmlrpc-${VERSION}.zip jsxmlrpc-${VERSION}
@@ -107,5 +110,5 @@ doc:
 	cd doc && $(MAKE) doc
 
 clean:
-	rm -rf jsxmlrpc-${VERSION}
+	rm -rf jsxmlrpc-${VERSION} jsxmlrpc-${VERSION}.zip jsxmlrpc-${VERSION}.tar.gz
 	cd doc && $(MAKE) clean
