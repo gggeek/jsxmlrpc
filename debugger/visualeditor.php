@@ -69,8 +69,8 @@ $noadd = (isset($_GET['noadd'])) ? (bool)$_GET['noadd'] : false;
 <link rel="stylesheet" type="text/css" href="container.css" />
 
 <!-- xmlrpc/jsonrpc base library -->
-<script type="text/javascript" src="xmlrpc_lib.js"></script>
-<script type="text/javascript" src="jsonrpc_lib.js"></script>
+<script type="text/javascript" src="../lib/xmlrpc_lib.js"></script>
+<script type="text/javascript" src="../lib/jsonrpc_lib.js"></script>
 <!-- display components -->
 <script type="text/javascript" src="xmlrpc_display.js"></script>
 <link rel="stylesheet" type="text/css" href="xmlrpc_tree.css" />
