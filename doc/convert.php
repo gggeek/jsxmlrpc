@@ -2,8 +2,7 @@
 /**
  * Script used to convert docbook source to human readable docs
  *
- * @version $Id: convert.php 11 2009-03-17 09:17:49Z ggiunta $
- * @copyright (c) 2007-2009 G. Giunta
+ * @copyright (c) 2007-2013 G. Giunta
  */
 
 if ($_SERVER['argc'] < 4)

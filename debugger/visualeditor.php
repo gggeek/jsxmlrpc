@@ -1,9 +1,8 @@
 <?php
 /**
  * Dialog for visually editing trees of json/xmlrpc values
- * @version $Id$
  * @author Gaetano Giunta
- * @copyright (c) 2006-2009 G. Giunta
+ * @copyright (c) 2006-2013 G. Giunta
  * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
  *
  * @todo do not set to "null" new nodes
