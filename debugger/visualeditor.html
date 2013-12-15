@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>XMLRPC Debugger Visual Editor</title>
+<!--
+ * Dialog for visually editing trees of json/xmlrpc values
+ * @version $Id: visualeditor.html,v 1.3 2007/03/10 11:02:21 ggiunta Exp $
+ * @author Gaetano Giunta
+ * @copyright (c) 2007 G. Giunta
+ * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+ *
+ * @todo do not set to "null" new nodes
+ * @todo add http no-cache headers. Is it really necessary? After all, a single http roundtrip is used...
+ * @todo find a better way to preview large trees of values (at least make all panel draggable)
+ * @todo improve display: do not show up/down arrows, 'angle line' for parameters, move up list numbers in ff
+-->
+<script type="text/javascript">
+<!--
+// parse GET parameters and html-cleanse them
+
+/// semicolon-separated list of types for the starting parameters
+/// (hint: the number of shown parameters depends on this)
+if (window.location.search.search(/params=/) != -1)
+{
+  var params = window.location.search.match(/params=([^&]*)/);
+  params = params[1].split(';');
+}
+else
+{
+  var params = [];
+}
+
+/// choose between json and xmlrpc
+if (window.location.search.search(/type=jsonrpc/) != -1)
+{
+  var type = 'jsonrpc';
+  var valid_types = {'string':1, 'null':9, 'double':5, 'boolean':6};
+  for(var i = 0; i < params.length; ++i)
+  {
+    if (params[i].search(/^(i4|int)$/) != -1)
+    {
+      params[i] = 'double';
+    }
+  }
+}
+else
+{
+  var type = 'xmlrpc';
+  var valid_types = {'string':1, 'i4':4, 'int':4, 'double':5, 'boolean':6, 'base64':8, 'datetime.iso8601':7};
+}
+
+
+/// when set to true/1, adding new vals or modifying type of initial values is forbidden
+if (window.location.search.search(/noadd=/) != -1)
+{
+  var noadd = window.location.search.match(/noadd=([^&]*)/);
+  noadd = Boolean(noadd[0]);
+}
+else
+{
+  var noadd = false;
+}
+//-->
+</script>
+
+<!-- YUI Treeview component: base libs -->
+<script type="text/javascript" src="yui/yahoo.js" ></script>
+<script type="text/javascript" src="yui/event.js" ></script>
+<!-- YUI Treeview component: treeview -->
+<script type="text/javascript" src="yui/treeview.js" ></script>
+<link rel="stylesheet" type="text/css" href="tree.css" />
+<!-- YUI Dialog component -->
+<script type="text/javascript" src="yui/dom.js" ></script>
+<script type="text/javascript" src="yui/dragdrop.js" ></script>
+<script type="text/javascript" src="yui/container.js" ></script>
+<link rel="stylesheet" type="text/css" href="container.css" />
+
+<!-- xmlrpc/jsonrpc base library -->
+<script type="text/javascript" src="xmlrpc_lib.js"></script>
+<script type="text/javascript" src="jsonrpc_lib.js"></script>
+<!-- display components -->
+<script type="text/javascript" src="xmlrpc_display.js"></script>
+<link rel="stylesheet" type="text/css" href="xmlrpc_tree.css" />
+
+<script type="text/javascript">
+<!--
+/* set up jsxmlrpc lib display options */
+askDeleteConfirmation = true;
+editElementDiv = 'dlgpanel';
+if (type == 'jsonrpc')
+{
+  elementType = 'jsonrpcval';
+  elementTypeJs = jsonrpcval;
+}
+else
+{
+  elementType = 'xmlrpcval';
+  elementTypeJs = xmlrpcval;
+}
+if (!noadd)
+  allowTopLevelElementTypeChange = true;
+
+var trees = [];
+var nodes = [];
+var previewDlg = null;
+
+function treeInit()
+{
+  trees = [];
+  nodes = [];
+
+  var ptype;
+  document.getElementById('valuepanel').innerHTML = '';
+  for(var i = 0; i < params.length; ++i)
+    document.getElementById('valuepanel').innerHTML += '<li id="param'+i+'" class="paramdiv"></li>\n';
+  for(i = 0; i < params.length; ++i)
+  {
+    ptype = params[i].toLowerCase();
+    trees[i] = new YAHOO.widget.TreeView('param'+i);
+    if (ptype == 'struct')
+      nodes[i] = new YAHOO.widget.XMLRPCNode(new elementTypeJs({}, ptype), trees[i].getRoot(), true, null, true);
+    else if (ptype == 'array')
+      nodes[i] = new YAHOO.widget.XMLRPCNode(new elementTypeJs([], ptype), trees[i].getRoot(), true, null, true);
+    else if (valid_types[ptype] !== undefined)
+    {
+      if (ptype == 'datetime.iso8601') // we need a mixed-case type specifier for dates
+        nodes[i] = new YAHOO.widget.XMLRPCNode(new elementTypeJs(null, 'dateTime.iso8601'), trees[i].getRoot(), true, null, true);
+      else
+        nodes[i] = new YAHOO.widget.XMLRPCNode(new elementTypeJs(null, ptype), trees[i].getRoot(), true, null, true);
+    }
+    else
+      nodes[i] = new YAHOO.widget.XMLRPCNode(new elementTypeJs(), trees[i].getRoot(), true, null, true);
+    trees[i].draw();
+  }
+  document.getElementById('numparams').innerHTML = String(params.length);
+}
+
+function addParam()
+{
+  showEditDlg(false, null, true, false, function(name, type, value) {
+
+    // add a div for the tree to the document
+    // add a tree
+    var next = trees.length;
+    var newTree = document.createElement("li");
+    newTree.className = 'paramdiv';
+    document.getElementById('valuepanel').appendChild(newTree);
+    trees[next] = new YAHOO.widget.TreeView(newTree);
+    nodes[next] = new YAHOO.widget.XMLRPCNode(buildVal(type, value), trees[next].getRoot(), true, null, true);
+    trees[next].draw();
+    document.getElementById('numparams').innerHTML = (next+1);
+
+  });
+}
+
+function buildthem()
+{
+  var out = '';
+  var root;
+  for (var i = 0; i < trees.length; i++)
+  {
+    root = trees[i].getRoot().children[0];
+    root.toggleEditable();
+    trees[i].draw();
+    if (type == 'jsonrpc')
+    {
+      /// @todo use an array and implode() here? it wouldbe cleaner...
+      out += root.data.serialize()+',\n';
+    }
+    else
+    {
+      out += '<param>\n'+root.data.serialize()+'</param>\n';
+    }
+  }
+  if (type == 'jsonrpc')
+    out = out.slice(0, -2)+'\n';
+  return out;
+}
+
+function hidePreviewDlg()
+{
+  for (var i = 0; i < trees.length; i++)
+  {
+    root = trees[i].getRoot().children[0];
+    root.toggleEditable();
+    trees[i].draw();
+  }
+  this.hide();
+}
+
+function preview()
+{
+  if (nodes.length == 0)
+    alert('No parameters to be serialized');
+  else
+  {
+    //alert(buildthem());
+    document.getElementById(editElementDiv).innerHTML = '<div class="hd">Serialized parameters</div>'+
+      '<div class="bd"><pre>' + htmlentities(buildthem()) + '</pre></div>';
+    previewDlg = new YAHOO.widget.Dialog(editElementDiv, {
+      width : "400px",
+      x: 240,
+      y: 75,
+      fixedcenter : false,
+      visible : true,
+      modal: true,
+      draggable: true,
+      constraintoviewport : false,
+      buttons : [ { text:"OK", handler:hidePreviewDlg, isDefault:true } ]
+      //            { text:"Cancel", handler:editElementCancel } ]
+    } );
+    var kl1 = new YAHOO.util.KeyListener(document, { keys:27 },
+      { fn:hidePreviewDlg,
+        scope:previewDlg,
+        correctScope:true }, "keyup" );
+        // keyup is used here because Safari won't recognize the ESC
+        // keydown event, which would normally be used by default
+    previewDlg.cfg.queueProperty("keylisteners", [kl1]);
+    previewDlg.render();
+    previewDlg.show();
+  }
+}
+
+function done()
+{
+  out = base64_encode(buildthem());
+  if (window.opener && window.opener.buildparams)
+    window.opener.buildparams(out);
+  window.close();
+}
+//-->
+</script>
+
+<link rel="stylesheet" type="text/css" href="visualeditor.css" />
+
+</head>
+<body onload="if (noadd) document.getElementById('addparam').style.display = 'none'; treeInit();">
+<h2>Editing <span id="numparams"></span>&nbsp;parameters</h2>
+<h3>
+<span id="addparam"><a href="#" onclick="addParam(); return false;">Add parameter</a> | </span>
+<a href="#" onclick="treeInit(); return false;">Reset all</a> |
+<a href="#" onclick="preview(); return false;">Preview</a> |
+<a href="#" onclick="window.close();">Cancel</a> |
+<a href="#" onclick="done(); return false;">Submit</a>
+</h3>
+<noscript>
+WARNING: this page is completely useless without javascript support.<br />Please use a javascript-enabled browser
+</noscript>
+<div id="dlgpanel"></div>
+<ol id="valuepanel"></ol>
+</body>
+</html>

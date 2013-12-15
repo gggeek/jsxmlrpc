@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>XML-RPC for Javascript</title>
+<link rel="stylesheet" type="text/css" href="xmlrpc.css" />
+</head>
+<body>
+<h1>XML-RPC for Javascript Homepage</h1>
+<div id="menu">
+<a href="#download">Download</a> |
+<a href="#news">News</a> |
+<a href="#interest">Documentation</a> |
+<a href="#debugger">Online xmlrpc debugger</a> |
+<a href="#development">Development</a> |
+<a href="#contact">Contact</a> |
+<a href="#roadmap">Roadmap</a> |
+</div>
+<div id="content">
+
+<p><a href="http://sourceforge.net"><img id="sflogo" src="http://sourceforge.net/sflogo.php?group_id=34455" width="88" height="31" alt="SourceForge Logo" /></a></p>
+
+<h2>Introduction</h2>
+<p>Welcome to the "JS-XMLRPC (XML-RPC for Javascript)" Homepage. It is a library implementing the <a href="http://www.xmlrpc.com/">XML-RPC</a> and <a href="http://json-rpc.org">JSON-RPC</a> protocols, written in Javascript.<br/>
+It is designed for ease of use, flexibility and completeness.<br/>
+Above all, it mimics as closely as possible the API of the <a href="http://phpxmlrpc.sourceforge.net">PHPXMLRPC</a> library.<br/><br/>
+<b>Please note</b> that there is another, older javascript library named JSXMLRPC available on sf.net: <a href="http://sourceforge.net/projects/jsxmlrpc">http://sourceforge.net/projects/jsxmlrpc</a>. Both libraries share the same intents, but the code is completely unrelated (at least for now).
+</p>
+
+<h2><a name="download">Download</a></h2>
+Release 0.4 of php-xmlrpc sister-library <a href="https://sourceforge.net/projects/phpxmlrpc/files/jsxmlrpc/0.4/jsxmlrpc-0.4.zip/download">is available here</a>.<br/>
+Please consider it is still marked as beta code when downloading and using it - even though all known reproducible bugs have been fixed.
+<!--
+<p>The latest stable release is version <a href="http://sourceforge.net/project/showfiles.php?group_id=34455&amp;package_id=26601&amp;release_id=443018"><span class="evidence">2.1</span></a> released on August 28, 2006</p>
+<p>The pervious stable release is version <a href="http://sourceforge.net/project/showfiles.php?group_id=34455&amp;package_id=26601&amp;release_id=355834"><span class="evidence">1.2.1</span></a> released on September 11, 2005</p>
+<p class="news">
+<b>Note:</b> all users are encouraged to upgrade to release 1.2 or later, since known exploits exist for earlier versions.<br/>
+All use of eval as a potential remote code execution exploit has been removed in release 1.2.<br/>
+More info on the vulnerabilities can be found <a href="#security">at the bottom of the page</a>.
+</p>
+-->
+
+<h2><a name="news">News</a></h2>
+<ul>
+
+<li>
+5th of September, 2009.<br/>
+Version 0.4 of the library <a href="">has been released</a>. It is a bugfix release that solves many errors in all areas of encoding and decoding values. All users are encouraged to upgrade.<br/><br/>
+</li>
+
+<li>
+26th of June, 2007.<br/>
+Version 0.3 of the library <a href="">has been released</a>. It is a bugfix release that solves many errors in all areas of encoding and decoding values. All users are encouraged to upgrade.<br/><br/>
+</li>
+
+<li>
+25th of April, 2007.<br/>
+Version 0.2 of the library <a href="">has been released</a>. It sports async method calls and auto-generation of javascript code, plus many small bugfixes.<br/>
+The <a href="javadoc/">online API documentation</a> has been updated, and a <a href="doc/">real manual</a> has been added.
+The <a href="http://phpxmlrpc.sourceforge.net/jsxmlrpc/debugger/debugger.html">online debugger</a> has been updated to the latest release.<br/><br/>
+</li>
+
+<li>
+8th of April, 2007.<br/>
+The <a href="http://phpxmlrpc.sourceforge.net/jsxmlrpc/debugger/debugger.html">online debugger</a> can now auto-generate the js code that wraps the call to a remote method into a javascript function<br/><br/>
+</li>
+
+<li>
+3rd of March, 2007.<br/>
+Initial release of the <a href="javadoc/">online API documentation</a>, in HTML format.<br/><br/>
+</li>
+
+<li>
+25th of Februray, 2007.<br/>
+Initial release of the library.<br/>
+Many features are still missing, but the overall code is in good shape, and the debugger is included.<br/>
+Release notes are available <a href="http://sourceforge.net/project/shownotes.php?group_id=34455&amp;release_id=489178">here</a>.<br/><br/>
+</li>
+
+<li>
+26th of January, 2007.<br/>
+The homepage for the library has been uploaded on SourceForge, as well as a demo (beta) version of the debugger and visual editor.
+</li>
+
+</ul>
+
+<h2><a name="interest">Documentation</a></h2>
+<ul>
+<li>API documentation for version 0.3, in <a href="javadoc/">HTML format</a>, generated from comments in the code (ie. missing examples, release notes and lots of extra details, such as global variables...)</li>
+<!--<li>Documentation for version 2, in <a href="doc-2/">HTML</a> or <a href="doc-2/xmlrpc_php.pdf">PDF</a> format. For the adventurous amongst you there is even an <a href="doc-2/xmlrpc_php.xml">xml+css</a> version (note: better viewing results obtained by Firefox and Opera users)</li>
+<li><a href="doc-1.1/">Documentation for version 1.2.1</a></li>
+<li><a href="doc/">Documentation for version 1.0.99 (older)</a></li>-->
+<li>A manual with more deatils is <a href="doc/">also available</a></li>
+</ul>
+
+<!--<h2><a name="demoserver">Online demo server</a></h2>
+<p>A demo server is active at the address <b>http://phpxmlrpc.sourceforge.net/server.php</b>. It exposes functions that can be used for interoperability testing. (the full code for the server is included in the CVS version of the library).<br/>
+You can see the source code here: <a href="server.php?showSource=TRUE">http://phpxmlrpc.sourceforge.net/server.php</a> (the xmlrpc server will activate on POST requests, and display its API on GET requests), and auto-generated documentation <a href="server.php">here</a></p>-->
+
+<h2><a name="debugger">Online xmlrpc debugger</a></h2>
+<p>A demo debugger application, built on top of this library, is active at the address <a href="http://phpxmlrpc.sourceforge.net/jsxmlrpc/debugger/debugger.html">http://phpxmlrpc.sourceforge.net/jsxmlrpc/debugger/debugger.html</a>.
+You can use the debugger to e.g. query the SF demo server (located at the address <b>http://phpxmlrpc.sourceforge.net/server.php</b>), or debug your own personal xmlrpc server, if it is accessible on the net.</p>
+
+<h2><a name="development">Development</a></h2>
+<p><a href="http://sourceforge.net/projects/phpxmlrpc/">SourceForge home page</a> (downloads, CVS access and bug tracker).</p>
+
+<h2><a name="contact">Contact</a></h2>
+See the lib's <a href="http://sourceforge.net/projects/phpxmlrpc/">SourceForge home page</a> for the complete list of maintainers, file a bug report, feature request or patch.<br/>
+For security related issues feel free to contact <a href="http://sourceforge.net/sendmessage.php?touser=114789">ggiunta at users.sourceforge.net</a>
+
+<h2><a name="roadmap">Roadmap</a></h2>
+<p>A list of things that might (or might not) make it into the next release:</p>
+<table cellspacing="0" cellpadding="0">
+<tr><th>Description</th><th>Status (CVS) - updated 2007/04/28</th></tr>
+
+<tr><td>implement the function xmlrpc_decode_xml()</td><td></td></tr>
+<tr><td class="odd">handling of charset encoding (where explicitly requested)</td><td></td></tr>
+<tr><td>timeout in send() methods</td><td>OK only for async calls</td></tr>
+<tr><td class="odd">async send() method</td><td>OK</td></tr>
+<tr><td>compression of requests</td><td></td></tr>
+<tr><td class="odd">handling of compression, chunked encoding in parseResponseHeaders</td><td></td></tr>
+<tr><td>Testsuite, speed tests, demo files</td><td></td></tr>
+<tr><td class="odd">htmlentities only encodes as much as php function htmlspecialchars</td><td></td></tr>
+<tr><td>encoding/decoding of anon js classes via an xml attribute (since it is hard to recover a class name, we could encode instead all methods code)</td><td></td></tr>
+<tr><td class="odd">complete parsing of: new xmlrpcclient('http://james:bond@a.complete/uri')</td><td></td></tr>
+<tr><td>using client credentials for https auth</td><td></td></tr>
+
+</table>
+
+<hr/>
+
+<a href="http://validator.w3.org/check?uri=http%3A%2F%2Fphpxmlrpc.sourceforge.net%2Fjsxmlrpc%2F"><img
+        src="http://www.w3.org/Icons/valid-xhtml10" height="31" width="88"
+        alt="Valid XHTML 1.0!" /></a><br/>
+Page last updated: 2013/12/15
+
+<!--<h2>Contact:</h2>
+
+To contact the maintainers of the library please goto the library <a href="http://sourceforge.net/projects/phpxmlrpc"> Sourceforge Home Page</a> and use the mail addresses of the developers listed there. You can also file bug reports, fetaure requests or patches.-->
+
+<!--
+<p>The original <a href="http://xmlrpc.usefulinc.com/php.html">project homepage</a> is still available.</p>
+-->
+</div>
+</body>
+</html>
