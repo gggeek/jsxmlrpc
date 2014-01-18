@@ -31,7 +31,7 @@ $Id: xmlrpc_js.xml,v 1.10 2008/03/07 16:53:57 ggiunta Exp $
 
     <para>Main goals of the project are ease of use, flexibility and
     completeness. And of course, full API compatibility with the <ulink
-    url="http://phpxmlrpc.sourceforge.net/">PHP-XMLRPC</ulink> library.</para>
+    url="https://github.com/gggeek/phpxmlrpc">PHP-XMLRPC</ulink> library.</para>
 
     <para>XML-RPC is a format devised by <ulink
     url="http://www.userland.com/">Userland Software</ulink> for achieving
@@ -302,9 +302,9 @@ $Id: xmlrpc_js.xml,v 1.10 2008/03/07 16:53:57 ggiunta Exp $
       <listitem>
         <para>The <emphasis>JS-XMLRPC</emphasis> development is hosted on
         <ulink
-        url="http://phpxmlrpc.sourceforge.net/jsxmlrpc/">phpxmlrpc.sourceforge.net/jsxmlrpc</ulink>.
+        url="https://github.com/gggeek/jsxmlrpc">github.com/gggeek/jsxmlrpc</ulink>.
         Bugs, feature requests and patches can be posted to the <ulink
-        url="http://sourceforge.net/projects/phpxmlrpc">project's
+        url="https://github.com/gggeek/phpxmlrpc/issues">project's
         website</ulink>.</para>
       </listitem>
 
@@ -352,7 +352,7 @@ $Id: xmlrpc_js.xml,v 1.10 2008/03/07 16:53:57 ggiunta Exp $
     might prove helpful: after all the two libraries share the exact same API
     (except for a handful of small quirks due to differences in the underlying
     language, detailed in Apendix A). It is available online at <ulink
-    url="http://phpxmlrpc.sourceforge.net/doc-2/">http://phpxmlrpc.sourceforge.net/doc-2/</ulink></para>
+    url="http://gggeek.github.io/phpxmlrpc/doc-2/">http://gggeek.github.io/phpxmlrpc/doc-2/</ulink></para>
   </chapter>
 
   <appendix>
