@@ -2,8 +2,8 @@
 /**
  * Dialog for visually editing trees of json/xmlrpc values
  * @author Gaetano Giunta
- * @copyright (c) 2006-2013 G. Giunta
- * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+ * @copyright (c) 2006-2020 G. Giunta
+ * @license code licensed under the BSD License: see LICENSE file
  *
  * @todo do not set to "null" new nodes
  * @todo add http no-cache headers. Is it really necessary? After all, a single http roundtrip is used...

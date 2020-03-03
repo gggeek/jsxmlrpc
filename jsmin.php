@@ -930,5 +930,3 @@ $jsMin = new JSMin($inFileName, $outFileName, $comments);
 $jsMin->minify();
 
 }
-
-?>

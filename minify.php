@@ -9,5 +9,3 @@ foreach( $argv as $file )
     $jsMin = new JSMin($file, '-');
     $jsMin->minify();
 }
-
-?>

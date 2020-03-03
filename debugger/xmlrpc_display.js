@@ -5,8 +5,8 @@
  * nested structures of xmlrpcvals/json vals
  *
  * @author Gaetano Giunta
- * @copyright (c) 2007-2013 G. Giunta
- * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+ * @copyright (c) 2007-2020 G. Giunta
+ * @license code licensed under the BSD License: see LICENSE file
  *
  * @todo (optionally) warn user if changing type of a struct/array which has children
  * @todo warn user (optionally) on value fixup when editing single value
