@@ -4,7 +4,7 @@
 ### USER EDITABLE VARS ###
 
 # path to PHP executable, preferably CLI version
-PHP=/usr/bin/php
+PHP=php
 
 # path were jsxmlrpc lib files will be copied to
 JSINCLUDEDIR=/usr/local/apache2/htdocs
