@@ -9,8 +9,7 @@
 
 ## JS-XMLRPC version 0.4 - 2009/09/05
 
-A lot of bugs have been fixed since version 0.3, in many areas of encoding and
-decoding xmlrpc values.
+A lot of bugs have been fixed since version 0.3, in many areas of encoding and decoding xmlrpc values.
 
 * added method setUserCredentials to xmlrpc_client, as the 'parent' php lib does in its latest version
 * added support for the <ex:nil/> tag from the apache library, both in input and output (output regulated by the
