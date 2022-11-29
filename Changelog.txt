@@ -1,10 +1,6 @@
-2009/09/05 - G. Giunta (giunta.gaetano@gmail.com) thanks Geoff Chessire
+NB: all detailed changes since16/3/2009 are recorded in Git history and are visible at https://github.com/gggeek/jsxmlrpc/commits/master
 
-* xmlrpc_lib.js: added method setUserCredentials to xmlrpc_client, as parent lib does;
-  added support for the <ex:nil/> from the apache library, both in input and output
-  (output regulated by the xmlrpc_null_apache_encoding variable, input by the
-  xmlrpc_null_extension one);
-  base64_decode now trims whitespace
+This file is kept for historical purposes.
 
 2008/03/07 - G. Giunta (giunta.gaetano@gmail.com)
 
@@ -75,7 +71,7 @@
 
  * xmlrpc_wrappers.js: allow wrapping functions to be called without the
    extra_options parameters
- 
+
 2007/05/01 - G. Giunta (giunta.gaetano@gmail.com)
 
  * xmlrpc_wrappers.js: add new function: wrap_xmlrpc_server; fix two bugs in
@@ -109,7 +105,7 @@
 
  * Makefile: recover lib version from source instead of having it hardcoded
 
- * doc/Makefile: improve xslt tranform to html; add pdf generation with fop
+ * doc/Makefile: improve xslt transform to html; add pdf generation with fop
 
 2007/04/07 - G. Giunta (giunta.gaetano@gmail.com)
 
@@ -145,7 +141,7 @@
 
  * better rendering of docs in xml+css format for function prototypes
 
- * debugger: if the xmlrpc_lib.js and jsopnrpc_lib.js files are not correctly
+ * debugger: if the xmlrpc_lib.js and jsonrpc_lib.js files are not correctly
    included, print an error message and disable the execute button
 
  * tagged and released as ver. 0.1

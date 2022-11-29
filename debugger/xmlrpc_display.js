@@ -5,7 +5,7 @@
  * nested structures of xmlrpcvals/json vals
  *
  * @author Gaetano Giunta
- * @copyright (c) 2007-2020 G. Giunta
+ * @copyright (c) 2007-2022 G. Giunta
  * @license code licensed under the BSD License: see LICENSE file
  *
  * @todo (optionally) warn user if changing type of a struct/array which has children

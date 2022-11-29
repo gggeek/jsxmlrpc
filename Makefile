@@ -12,7 +12,7 @@ JSINCLUDEDIR=/usr/local/apache2/htdocs
 # mkdir is a thorny beast under windows: make sure we can not use the cmd version, running eg. "make MKDIR=mkdir.exe"
 MKDIR=mkdir
 
-#find too
+# find too
 FIND=find
 
 #### DO NOT TOUCH FROM HERE ONWARDS ###
@@ -69,7 +69,7 @@ DEBUGGERFILES=debugger/debugger.html \
  debugger/tree.css \
  debugger/yui/*.js \
  debugger/img/*.gif*
- 
+
 
 all: install
 

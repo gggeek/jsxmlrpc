@@ -1,7 +1,6 @@
 /**
  * Example script to take advantage of jsxmlrpc in a WSH script host environment
  *
- * @version $Id: demo_wsh.js,v 1.1 2007/07/13 17:33:17 ggiunta Exp $
  * @author Gaetano Giunta
  * @copyright
  */

@@ -2,7 +2,6 @@
 <!--
   Example script to take advantage of jsxmlrpc in a WSH script
 
-  @version $Id: demo_vb.wsf,v 1.1 2007/07/13 17:33:17 ggiunta Exp $
   @author Gaetano Giunta
   @copyright
 -->
@@ -12,7 +11,7 @@
     function create_xmlrpc_client(path, server, port, method)
     {
       return new xmlrpc_client(path, server, port, method);
-    }    
+    }
     function create_xmlrpcmsg(meth, pars)
     {
       return new xmlrpcmsg(meth, pars);
@@ -24,7 +23,7 @@
     function create_xmlrpcresp(val, fcode, fstr, valtyp)
     {
       return new xmlrpcresp(val, fcode, fstr, valtyp);
-    }    
+    }
   </script>
   <script language="VBScript">
     ' Get a state name given its number

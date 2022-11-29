@@ -4,7 +4,7 @@
 <!--
  Customization xsl stylesheet for docbook to chunked html transform
  @author Gaetano Giunta
- @copyright (c) 2007-2020 G. Giunta
+ @copyright (c) 2007-2022 G. Giunta
  @license
 -->
 

@@ -37,7 +37,6 @@
 * @copyright   No new copyright ; please keep above and following information.
 * @author      David Holmes <dholmes@cfdsoftware.net> of CFD Labs, France
 * @author      Gaetano Giunta
-* @version     $Id: $
 *
 * Please note, this is a brutal and simple conversion : it could undoubtedly be
 * improved, as a PHP implementation, by applying more PHP-specific programming

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <?xml-stylesheet href="docbook-css/driver.css" type="text/css"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <!--
 JS-XMLRPC User manual
 $Id: xmlrpc_js.xml,v 1.10 2008/03/07 16:53:57 ggiunta Exp $
@@ -220,7 +220,7 @@ $Id: xmlrpc_js.xml,v 1.10 2008/03/07 16:53:57 ggiunta Exp $
 
         <listitem>
           <para><filename>lib/jsxmlrpc-min.js</filename>: this file contains
-          the 3 files lisetd above, stripped of all comments, whitespace and
+          the 3 files listed above, stripped of all comments, whitespace and
           indentation and glued together. It is provided as a commodity for
           deployment on webserver setups where download bandwidth and latency
           are important</para>

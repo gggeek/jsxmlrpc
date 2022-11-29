@@ -2,7 +2,7 @@
 /**
  * Dialog for visually editing trees of json/xmlrpc values
  * @author Gaetano Giunta
- * @copyright (c) 2006-2020 G. Giunta
+ * @copyright (c) 2006-2022 G. Giunta
  * @license code licensed under the BSD License: see LICENSE file
  *
  * @todo do not set to "null" new nodes
@@ -51,7 +51,7 @@ $noadd = (isset($_GET['noadd'])) ? (bool)$_GET['noadd'] : false;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <title>XMLRPC Debugger Visual Editor</title>
 
@@ -213,8 +213,12 @@ function preview()
 function done()
 {
   out = base64_encode(buildthem());
-  if (window.opener && window.opener.buildparams)
-    window.opener.buildparams(out);
+  try {
+    if (window.opener && window.opener.buildparams)
+      window.opener.buildparams(out);
+  } catch (error) {
+    alert('Error submitting parameters back: ' + error);
+  }
   window.close();
 }
 //-->

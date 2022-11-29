@@ -2,7 +2,7 @@
 /**
  * Script used to convert docbook source to human readable docs
  *
- * @copyright (c) 2007-2020 G. Giunta
+ * @copyright (c) 2007-2022 G. Giunta
  */
 
 if ($_SERVER['argc'] < 4)
