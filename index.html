@@ -113,25 +113,6 @@ You can use the debugger to e.g. query the SF demo server (located at the addres
 <!-- See the lib's <a href="http://sourceforge.net/projects/phpxmlrpc/">SourceForge home page</a> for the complete list of maintainers, file a bug report, feature request or patch.<br/> -->
 For security related issues feel free to contact <a href="http://sourceforge.net/sendmessage.php?touser=114789">ggiunta at users.sourceforge.net</a>
 
-<h2><a name="roadmap">Roadmap</a></h2>
-<p>A list of things that might (or might not) make it into the next release:</p>
-<table cellspacing="0" cellpadding="0">
-<tr><th>Description</th><th>Status (CVS) - updated 2007/04/28</th></tr>
-
-<tr><td>implement the function xmlrpc_decode_xml()</td><td></td></tr>
-<tr><td class="odd">handling of charset encoding (where explicitly requested)</td><td></td></tr>
-<tr><td>timeout in send() methods</td><td>OK only for async calls</td></tr>
-<tr><td class="odd">async send() method</td><td>OK</td></tr>
-<tr><td>compression of requests</td><td></td></tr>
-<tr><td class="odd">handling of compression, chunked encoding in parseResponseHeaders</td><td></td></tr>
-<tr><td>Testsuite, speed tests, demo files</td><td></td></tr>
-<tr><td class="odd">htmlentities only encodes as much as php function htmlspecialchars</td><td></td></tr>
-<tr><td>encoding/decoding of anon js classes via an xml attribute (since it is hard to recover a class name, we could encode instead all methods code)</td><td></td></tr>
-<tr><td class="odd">complete parsing of: new xmlrpcclient('http://james:bond@a.complete/uri')</td><td></td></tr>
-<tr><td>using client credentials for https auth</td><td></td></tr>
-
-</table>
-
 <hr/>
 
 <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fgggeek.github.com%2Fjsxmlrpc%2F"><img
