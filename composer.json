@@ -1,7 +1,0 @@
-{
-    "name": "phpxmlrpc/jsxmlrpc",
-    "description": "A javascript library for building xmlrpc and jsonrpc clients",
-    "license": "BSD-3-Clause",
-    "homepage": "https://gggeek.github.io/jsxmlrpc/",
-    "keywords": [ "xmlrpc", "webservices", "jsonrpc", "ajax" ]
-}
