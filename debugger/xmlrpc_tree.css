@@ -3,10 +3,9 @@
 *
 * Extends tree.css, container.css from YUI lib
 *
-* @version $Id: xmlrpc_tree.css,v 1.3 2007/03/10 11:02:21 ggiunta Exp $
 * @author Gaetano Giunta
-* @copyright (c) 2007 G. Giunta
-* @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+* @copyright (c) 2007-2022 G. Giunta
+* @license code licensed under the BSD License: see LICENSE file
 *
 * @todo fix word-wrapping of node contents for not-quite-wide-enough windows
 */

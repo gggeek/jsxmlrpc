@@ -1,14 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <title>XMLRPC Debugger Visual Editor</title>
 <!--
  * Dialog for visually editing trees of json/xmlrpc values
- * @version $Id: visualeditor.html,v 1.3 2007/03/10 11:02:21 ggiunta Exp $
  * @author Gaetano Giunta
- * @copyright (c) 2007 G. Giunta
- * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+ * @copyright (c) 2007-2022 G. Giunta
+ * @license code licensed under the BSD License: see LICENSE file
  *
  * @todo do not set to "null" new nodes
  * @todo add http no-cache headers. Is it really necessary? After all, a single http roundtrip is used...
@@ -77,8 +76,8 @@ else
 <link rel="stylesheet" type="text/css" href="container.css" />
 
 <!-- xmlrpc/jsonrpc base library -->
-<script type="text/javascript" src="xmlrpc_lib.js"></script>
-<script type="text/javascript" src="jsonrpc_lib.js"></script>
+<script type="text/javascript" src="../lib/xmlrpc_lib.js"></script>
+<script type="text/javascript" src="../lib/jsonrpc_lib.js"></script>
 <!-- display components -->
 <script type="text/javascript" src="xmlrpc_display.js"></script>
 <link rel="stylesheet" type="text/css" href="xmlrpc_tree.css" />
@@ -225,8 +224,12 @@ function preview()
 function done()
 {
   out = base64_encode(buildthem());
-  if (window.opener && window.opener.buildparams)
-    window.opener.buildparams(out);
+  try {
+    if (window.opener && window.opener.buildparams)
+      window.opener.buildparams(out);
+  } catch (error) {
+    alert('Error submitting parameters back: ' + error);
+  }
   window.close();
 }
 //-->

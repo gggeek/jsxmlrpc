@@ -3,10 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--
 /**
- * @version $Id: debugger.html,v 1.13 2007/04/25 21:01:06 ggiunta Exp $
  * @author Gaetano Giunta
- * @copyright (c) 2007 G. Giunta
- * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+ * @copyright (c) 2008-2022 G. Giunta
+ * @license code licensed under the BSD License: see LICENSE file
  *
  * @todo add links to documentation from every option caption
  * @todo switch params for http compression from 0,1,2 to values to be used directly
@@ -49,9 +48,9 @@
   var alt_payload = '';
 </script>
 <!-- xmlrpc/jsonrpc base library -->
-<script type="text/javascript" src="xmlrpc_lib.js"></script>
-<script type="text/javascript" src="jsonrpc_lib.js"></script>
-<script type="text/javascript" src="xmlrpc_wrappers.js"></script>
+<script type="text/javascript" src="../lib/xmlrpc_lib.js"></script>
+<script type="text/javascript" src="../lib/jsonrpc_lib.js"></script>
+<script type="text/javascript" src="../lib/xmlrpc_wrappers.js"></script>
 
 <style type="text/css">
 <!--
@@ -623,7 +622,7 @@ td {vertical-align: top; font-family: Verdana, Arial, Helvetica; font-size: 8pt;
 
 <div id="controller">
 <h1>XMLRPC <form name="frmxmlrpc" style="display: inline;" action="."><input name="yes" type="radio" onclick="switchtransport(0);"/></form>
-/<form name="frmjsonrpc" style="display: inline;" action="."><input name="yes" type="radio" onclick="switchtransport(1);"/></form>JSONRPC Debugger (based on the <a href="http://phpxmlrpc.sourceforge.net/jsxmlrpc/">JS-XMLRPC</a> library)</h1>
+/<form name="frmjsonrpc" style="display: inline;" action="."><input name="yes" type="radio" onclick="switchtransport(1);"/></form>JSONRPC Debugger (based on the <a href="https://gggeek.github.io/jsxmlrpc/">JS-XMLRPC</a> library)</h1>
 <noscript>
 WARNING: this page is completely useless without javascript support.<br />Please use a javascript-enabled browser
 </noscript>
@@ -663,14 +662,14 @@ WARNING: this page is completely useless without javascript support.<br />Please
 <table id="optionsblock">
 <tr>
 <td><h2>Client options</h2></td>
-<td class="labelcell">Show debug info:</td><td><select name="debug" onclick="switchdebug();">
+<td class="labelcell">Show debug info:</td><td><select name="debug" onchange="switchdebug();">
 <option value="0" selected="selected">No</option>
 <option value="1">Yes</option>
 <option value="2">More</option>
 </select>
 </td>
 <td class="labelcell">Timeout:</td><td><input type="text" name="timeout" size="3" value="" disabled="disabled" /></td>
-<td class="labelcell">Protocol:</td><td><select name="protocol" onclick="switchprotocol();"><!--onclick="switchssl(); switchauth(); swicthcainfo();">-->
+<td class="labelcell">Protocol:</td><td><select name="protocol" onchange="switchprotocol();"><!--onclick="switchssl(); switchauth(); swicthcainfo();">-->
 <option value="0" selected="selected">HTTP</option>
 <!--<option value="1">HTTP 1.1</option>-->
 <option value="2">HTTPS</option>

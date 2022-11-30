@@ -4,10 +4,9 @@
  * Extension of Yahoo YUI Treeview component, used for rendering and editing
  * nested structures of xmlrpcvals/json vals
  *
- * @version $Id: xmlrpc_display.js,v 1.4 2007/03/10 11:02:21 ggiunta Exp $
  * @author Gaetano Giunta
- * @copyright (c) 2007 G. Giunta
- * @license code licensed under the BSD License: http://phpxmlrpc.sourceforge.net/jsxmlrpc/license.txt
+ * @copyright (c) 2007-2022 G. Giunta
+ * @license code licensed under the BSD License: see LICENSE file
  *
  * @todo (optionally) warn user if changing type of a struct/array which has children
  * @todo warn user (optionally) on value fixup when editing single value
