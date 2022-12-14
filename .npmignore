@@ -1,0 +1,14 @@
+/.gitattributes
+/.github
+/.gitignore
+/.idea
+/.npmignore
+/doc/convert.php
+/doc/custom.fo.xsl
+/doc/custom.xsl
+/doc/Makefile
+/jsmin.php
+/Makefile
+/minify.php
+/todo.txt
+/var

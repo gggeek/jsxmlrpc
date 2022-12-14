@@ -1,5 +1,3 @@
-// For this to work, use npm to install jsdom and xhr2
-
 import {xmlrpc_client, xmlrpcmsg} from '@jsxmlrpc/jsxmlrpc';
 
 // 'hack' 1 - this is required to insure the XMLHttpRequest object used by the library is available when on Node
