@@ -2,7 +2,6 @@
  * Example script to take advantage of jsxmlrpc in a WSH script host environment
  *
  * @author Gaetano Giunta
- * @copyright
  */
 
 // Import jsxmlrpc lib
@@ -17,7 +16,7 @@ function Include(jsFile) {
 
 eval(Include('xmlrpc_lib.js'));
 
-var client = new xmlrpc_client('http://phpxmlrpc.sourceforge.net/server.php');
+var client = new xmlrpc_client('https://gggeek.altervista.org/sw/xmlrpc/demo/server/server.php');
 var msg = new xmlrpcmsg('system.listMethods', []);
 client.setDebug(2);
 var resp = client.send(msg);

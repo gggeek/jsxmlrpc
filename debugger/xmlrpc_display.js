@@ -15,7 +15,7 @@
  * @todo add support for xmlrpcparam values, instead of using 'node' 0 to identify it (?)
  * @todo use this.labelStyle instead of hardcoded 'ygtvmv' for styles???
  * @todo use xmlrpcval functions to access children instead of .me, .mytype
- * @todo smarter tree redawing: rebuild only the subtree needed
+ * @todo smarter tree redrawing: rebuild only the subtree needed
  * @todo find a smarter way to keep tooltips appearing after node buttons have been hidden + shown again...
  * @todo rewrite manipulation of values functions using indexOf(). In case of IE, Array has been extended...
  * @todo the tree preloads the standard tree images (via stylesheet). we should do the same for our custom images
@@ -1031,7 +1031,6 @@ function swapChild(aNode, aParent, anOffset){
 	} else
 		return false;
 }
-
 
 /* for those poor browsers that have a lacking JS implementation, we provide JS 1.5 compat.... */
 if(typeof Array.prototype.indexOf==='undefined')Array.prototype.indexOf=function(n){for(var i=0;i<this.length;i++){if(this[i]===n){return i;}}return -1;}

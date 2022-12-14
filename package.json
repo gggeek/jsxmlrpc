@@ -1,0 +1,29 @@
+{
+  "name": "@jsxmlrpc/jsxmlrpc",
+  "version": "0.6.0",
+  "description": "A javascript library for building xmlrpc and jsonrpc clients",
+
+  "main": "lib/index.js",
+  "devDependencies": {
+  },
+
+  "directories": {
+    "doc": "doc",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gggeek/jsxmlrpc.git"
+  },
+  "keywords": [ "xmlrpc", "jsonrpc"],
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/gggeek/jsxmlrpc/issues"
+  },
+  "homepage": "http://gggeek.github.io/jsxmlrpc/"
+}

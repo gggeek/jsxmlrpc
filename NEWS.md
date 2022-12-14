@@ -1,9 +1,18 @@
+## JS-XMLRPC version 0.6 - unreleased
+
+* BREAKING CHANGE: made the code available as ES6 module, as well as NPM package "@jsxmlrpc/jsxmlrpc"
+
+* fixed: setting the user-agent http header in requests
+* fixed: defaulting to port 443 when creating a client from an https url with no port specified
+* improvement: make use of `JSON.parse` for parsing jsonrpc responses
+* improvement: debugger: removed or disabled all unsupported options
+* improvement: added extra details in some error messages
+
+
 ## JS-XMLRPC version 0.5 - 2022/11/29
 
 * debugger improvements: fix loading the js library files
-
 * debugger improvements: in case the dialog for visually editing values does fail submitting values, show an alert
-
 * debugger improvements: fix previewing of manually built xmlrpc params
 
 
