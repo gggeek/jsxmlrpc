@@ -3,8 +3,10 @@
   Example script to take advantage of jsxmlrpc in a WSH script
 
   @author Gaetano Giunta
+
+  @todo this is currently broken. We need to transpile the library to ES5 for it to work...
 -->
-  <script language="JScript" src="xmlrpc_lib.js"/>
+  <script language="JScript" src="../lib/xmlrpc_lib.js"/>
   <script language="JScript">
     // Stubs for object creators are apparently needed to allow invocation from VB
     function create_xmlrpc_client(path, server, port, method)
