@@ -1,5 +1,3 @@
-# $Id: Makefile,v 1.8 2008/03/07 17:09:56 ggiunta Exp $
-
 ### USER EDITABLE VARS ###
 
 WEB=/var/www/jsxmlrpc/doc
@@ -26,14 +24,14 @@ install:
 
 doc: out/index.html jsxmlrpc.pdf js_docs_out/index.html
 
-out/index.html jsxmlrpc.pdf: xmlrpc_js.xml 
+out/index.html jsxmlrpc.pdf: xmlrpc_js.xml
 	-${MKDIR} out
 	-rm -rf out/*
 # custom php script that does the xslt magic
 	${PHP} convert.php xmlrpc_js.xml custom.xsl out/
 # fix link to api in html docs
 #	sed -e 's/href=\"???\"/href=\"api\/index.html\"/' out/ch07.html > out/ch07b.html && cp -f out/ch07b.html out/ch07.html && rm out/ch07b.html
-	
+
 # convert to fo and then to pdf using apache fop
 	${PHP} convert.php xmlrpc_js.xml custom.fo.xsl xmlrpc_js.fo.xml
 	${FOP} xmlrpc_js.fo.xml jsxmlrpc.pdf

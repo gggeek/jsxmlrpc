@@ -4,22 +4,21 @@
     "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <!--
 JS-XMLRPC User manual
-$Id: xmlrpc_js.xml,v 1.10 2008/03/07 16:53:57 ggiunta Exp $
 -->
 <book lang="en">
   <title>JS-XMLRPC</title>
 
-  <subtitle>version 0.4</subtitle>
+  <subtitle>version 0.6</subtitle>
 
   <bookinfo>
-    <date>XX YYYY 2007</date>
+    <date>XX YYYY 2012</date>
 
     <author>
       <surname>Gaetano Giunta</surname>
     </author>
 
     <copyright>
-      <year>2007 G. Giunta</year>
+      <year>2007-2022 G. Giunta</year>
     </copyright>
   </bookinfo>
 

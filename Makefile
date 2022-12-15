@@ -1,5 +1,4 @@
 # Makefile for jsxmlrpc library
-# $Id: Makefile,v 1.7 2008/03/07 16:52:53 ggiunta Exp $
 
 ### USER EDITABLE VARS ###
 
