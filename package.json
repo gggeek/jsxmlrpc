@@ -2,16 +2,21 @@
   "name": "@jsxmlrpc/jsxmlrpc",
   "version": "0.6.0",
   "description": "A javascript library for building xmlrpc and jsonrpc clients",
-  "keywords": [ "xmlrpc", "jsonrpc"],
+  "keywords": [
+    "xmlrpc",
+    "jsonrpc"
+  ],
   "license": "BSD-3-Clause",
-
   "dependencies": {
-      "jsdom": "*",
-      "xhr2": "*"
+    "jsdom": "*",
+    "xhr2": "*"
   },
   "devDependencies": {
+    "gulp": "*",
+    "jsdoc": "*",
+    "uglify-js": "*",
+    "xslt3": "*"
   },
-
   "type": "module",
   "main": "lib/index.js",
   "directories": {
@@ -19,9 +24,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "minify": "./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/jsonrpc_lib.min.js -- lib/jsonrpc_lib.js; ./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/xmlrpc_lib.min.js -- lib/xmlrpc_lib.js; ./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/xmlrpc_wrappers.min.js -- lib/xmlrpc_wrappers.js",
+    "doc": "./node_modules/.bin/gulp doc"
   },
-
   "homepage": "http://gggeek.github.io/jsxmlrpc/",
   "repository": {
     "type": "git",

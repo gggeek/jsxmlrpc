@@ -10,7 +10,7 @@
 
 
 <!-- import base stylesheet -->
-<xsl:import href="../../../docbook-xsl/xhtml/chunk.xsl"/>
+<xsl:import href="%docbook-chunk.xsl%"/>
 
 
 <!-- customization vars -->

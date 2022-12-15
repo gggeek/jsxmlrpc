@@ -11,7 +11,7 @@
 
 
 <!-- import base stylesheet -->
-<xsl:import href="../../../docbook-xsl/fo/docbook.xsl"/>
+<xsl:import href="%fo-docbook.xsl%"/>
 
 
 <!-- customization vars -->

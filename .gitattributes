@@ -1,5 +1,11 @@
-/.editorcinfig export-ignore
+# For the moment, we keep the doc-building toolchain in the tarball gotten from github
+
+/.editorconfig export-ignore
 /.gitattributes export-ignore
+/.github/** export-ignore
 /.gitignore export-ignore
-/jsmin.php export-ignore
-/minify.php export-ignore
+/.npmignore export-ignore
+#/doc/build/** export-ignore
+#/doc/Makefile export-ignore
+/gulpfile.js export-ignore
+#/Makefile export-ignore
