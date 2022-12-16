@@ -1,4 +1,4 @@
-# For the moment, we keep the doc-building toolchain in the tarball gotten from github
+# For the moment at least, we keep the doc-building toolchain in the tarball gotten from github
 
 /.editorconfig export-ignore
 /.gitattributes export-ignore

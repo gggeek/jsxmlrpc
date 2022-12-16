@@ -12,7 +12,6 @@
     "xhr2": "*"
   },
   "devDependencies": {
-    "gulp": "*",
     "jsdoc": "*",
     "uglify-js": "*",
     "xslt3": "*"
@@ -24,7 +23,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "minify": "./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/jsonrpc_lib.min.js -- lib/jsonrpc_lib.js; ./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/xmlrpc_lib.min.js -- lib/xmlrpc_lib.js; ./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/xmlrpc_wrappers.min.js -- lib/xmlrpc_wrappers.js",
+    "minify": "./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/jsonrpc_lib.min.js --source-map \"url='./jsonrpc_lib.min.js.map'\" -- lib/jsonrpc_lib.js; ./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/xmlrpc_lib.min.js --source-map \"url='./xmlrpc_lib.min.js.map'\" -- lib/xmlrpc_lib.js; ./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/xmlrpc_wrappers.min.js --source-map \"url='./xmlrpc_wrappers.min.js.map'\" -- lib/xmlrpc_wrappers.js",
     "doc": "./node_modules/.bin/gulp doc"
   },
   "homepage": "http://gggeek.github.io/jsxmlrpc/",

@@ -1,9 +1,8 @@
 /.idea
-/doc/buildx/mlrpc_js.fo.xml
+/doc/build/docbook-xsl
+/doc/build/xmlrpc_js.fo.xml
+/doc/api
 /doc/xmlrpc_js.html
 /doc/xmlrpc_js.pdf
-/lib/jsonrpc_lib.min.js
-/lib/xmlrpc_lib.min.js
-/lib/xmlrpc_wrappers.min.js
 /node_modules
 /package-lock.json
