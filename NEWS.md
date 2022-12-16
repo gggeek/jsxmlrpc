@@ -4,6 +4,7 @@
 
 * fixed: setting the user-agent http header in requests
 * fixed: defaulting to port 443 when creating a client from an https url with no port specified
+* fixed: hardened methods used to generate js code to wrap remote servers against code injection
 * improvement: make use of `JSON.parse` for parsing jsonrpc responses
 * improvement: debugger: removed or disabled all unsupported options
 * improvement: added extra details in some error messages

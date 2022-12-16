@@ -9,14 +9,38 @@ A javascript library for building xmlrpc and jsonrpc clients.
 REQUIREMENTS
 ------------
 
-* Any browser with support for ECMAScript 6 and XMLHttpRequest or
-* NodeJS version v12.20.0 or v14.13.0 or later, or
-* Windows Scripting Host version (???)
+* Any browser with support for ECMAScript 6 including XMLHttpRequest and DOMParser (*) or
+* NodeJS version v12.20.0 or v14.13.0 or later
 
-API DOCUMENTATION
------------------
+(*) = according to caniuse.com, that includes at least: Chrome 61, Edge 16, Firefox 60, Opera 48, Safari 11, Chrome
+    Android 108, Firefox for Android 107, Opera Mobile 72, Safari on iOS 11, Samsung Internet 8.2
 
-HTML documentation can be found in the doc/ directory.
+INSTALLATION
+------------
+
+### Browsers
+
+include the following in the web page:
+
+    import {xmlrpc_client, xmlrpcmsg, xmlrpcval} from '...';
+
+### NodeJS
+
+Run
+
+    npm install @jsxmlrpc/jsxmlrpc
+
+Then, in your code, add:
+
+    import {xmlrpc_client, xmlrpcmsg, xmlrpcval} from '@jsxmlrpc/jsxmlrpc';
+
+USAGE / API DOCUMENTATION
+-------------------------
+
+HTML documentation can be found in the doc/ directory. The manual ([xmlrpc_js.xml](doc/xmlrpc_js.xml)) is "xml file
+with stylesheets" format: it can be viewed perfectly with a web browser.
+
+A couple of sample files can be found in the demo/ directory.
 
 DEBUGGER USAGE
 --------------

@@ -81,6 +81,7 @@ else
 import {base64_encode, htmlentities, xmlrpcval, xmlrpc_encode_entities} from "../lib/xmlrpc_lib.js";
 import {jsonrpcval} from "../lib/jsonrpc_lib.js";
 
+/// @todo we make these global as courtesy to xmlrpc_display.js. Why don't we make that import them on its own?
 window.base64_encode = base64_encode;
 window.jsonrpcval = jsonrpcval;
 window.xmlrpcval = xmlrpcval;
