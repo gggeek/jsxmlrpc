@@ -5,7 +5,7 @@
 /.github/** export-ignore
 /.gitignore export-ignore
 /.npmignore export-ignore
+/build/** export-ignore
 #/doc/build/** export-ignore
-#/doc/Makefile export-ignore
 /gulpfile.js export-ignore
 #/Makefile export-ignore

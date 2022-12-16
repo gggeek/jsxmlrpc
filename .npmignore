@@ -1,12 +1,16 @@
+# For the moment at least, we do not add the generated docs into the node package
+
 /.editorconfig
 /.gitattributes
 /.github
 /.gitignore
 /.idea
 /.npmignore
+/doc/api
 /doc/build
-/doc/Makefile
-/gulpfile.js
+/doc/Changelog.txt
+/doc/xmlrpc_js.html
+/doc/xmlrpc_js.pdf
 /Makefile
 /node_modules
 
