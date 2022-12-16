@@ -77,6 +77,7 @@ $noadd = (isset($_GET['noadd'])) ? (bool)$_GET['noadd'] : false;
     import {jsonrpcval} from "../lib/jsonrpc_lib.js";
 
     window.base64_encode = base64_encode;
+    window.htmlentities = htmlentities;
     window.jsonrpcval = jsonrpcval;
     window.xmlrpcval = xmlrpcval;
     window.xmlrpc_encode_entities = xmlrpc_encode_entities;
