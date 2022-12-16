@@ -9,7 +9,7 @@ DOCBOOK_XSL_VERSION=1.79.2
 cd "$(dirname -- "${BASH_SOURCE[0]}")"
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    curl fop unzip
+    curl fop git unzip
 
 # download and unzip the xslt package
 if [ ! -d docbook-xsl ]; then
