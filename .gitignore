@@ -4,5 +4,6 @@
 /doc/api
 /doc/xmlrpc_js.html
 /doc/xmlrpc_js.pdf
+/lib/*.map
 /node_modules
 /package-lock.json
