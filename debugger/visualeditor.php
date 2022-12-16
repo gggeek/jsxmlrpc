@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
 <title>XMLRPC Debugger Visual Editor</title>
+<meta name="robots" content="noindex,nofollow"/>
 <?php
 /**
  * Dialog for visually editing trees of json/xmlrpc values
