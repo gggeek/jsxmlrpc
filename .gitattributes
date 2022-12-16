@@ -8,4 +8,3 @@
 /build/** export-ignore
 #/doc/build/** export-ignore
 /gulpfile.js export-ignore
-#/Makefile export-ignore

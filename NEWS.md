@@ -1,6 +1,14 @@
 ## JS-XMLRPC version 0.6 - unreleased
 
-* BREAKING CHANGE: made the code available as ES6 module, as well as NPM package "@jsxmlrpc/jsxmlrpc"
+* BREAKING CHANGE: transformed the library in an ES6 module, available as NPM package "@jsxmlrpc/jsxmlrpc".
+
+  This means that:
+  - the minimum supported browser versions have increased notably
+  - NodeJS is now supported
+  - WSH is not supported anymore
+  - in order to make use of the library in a browser, the js code including it has to use an `import` statement, rather
+    than simply include it via a `script` tag
+  - the library is now made available via a CDN, making it easy to use it in frontend code without adding it to your webserver
 
 * fixed: setting the user-agent http header in requests
 * fixed: defaulting to port 443 when creating a client from an https url with no port specified

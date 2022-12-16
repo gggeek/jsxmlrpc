@@ -20,7 +20,7 @@ INSTALLATION
 
 ### Browsers
 
-include the following in the web page:
+include the following in the web page, within a `<script type="module>` section:
 
     import {xmlrpc_client, xmlrpcmsg, xmlrpcval} from '...';
 
