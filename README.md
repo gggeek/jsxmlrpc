@@ -22,7 +22,7 @@ INSTALLATION
 
 include the following in the web page, within a `<script type="module>` section:
 
-    import {xmlrpc_client, xmlrpcmsg, xmlrpcval} from 'https://cdn.jsdelivr.net/npm/@jsxmlrpc/jsxmlrpc@0.6/dist/lib/index.js';
+    import {xmlrpc_client, xmlrpcmsg, xmlrpcval} from 'https://cdn.jsdelivr.net/npm/@jsxmlrpc/jsxmlrpc@0.6/lib/index.js';
 
 ### NodeJS
 

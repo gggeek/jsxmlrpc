@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <script type="module">
-        import {xmlrpc_client, xmlrpcmsg} from "https://cdn.jsdelivr.net/npm/@jsxmlrpc/jsxmlrpc@0.6/dist/lib/index";
+        import {xmlrpc_client, xmlrpcmsg} from "https://cdn.jsdelivr.net/npm/@jsxmlrpc/jsxmlrpc@0.6/lib/index.js";
 
         var client = new xmlrpc_client('https://gggeek.altervista.org/sw/xmlrpc/demo/server/server.php');
         var msg = new xmlrpcmsg('system.listMethods', []);
