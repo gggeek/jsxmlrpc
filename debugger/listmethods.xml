@@ -1,0 +1,12 @@
+<!-- a 'fake' xmlrpc server, which knows a single method -->
+<methodResponse>
+    <params>
+        <param>
+            <value><array>
+                <data>
+                    <value><string>system.listMethods</string></value>
+                </data>
+            </array></value>
+        </param>
+    </params>
+</methodResponse>

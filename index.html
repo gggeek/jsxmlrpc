@@ -2,7 +2,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>XML-RPC for Javascript</title>
 <link rel="stylesheet" type="text/css" href="xmlrpc.css" />
 </head>
@@ -19,15 +19,15 @@
 <div id="content">
 
 <h2>Introduction</h2>
-<p>Welcome to the "JS-XMLRPC (XML-RPC for Javascript)" Homepage. It is a library implementing the <a href="http://xmlrpc.com/">XML-RPC</a> and <a href="https://json-rpc.org">JSON-RPC</a> protocols, written in Javascript.<br/>
+<p>Welcome to the "JS-XMLRPC (XML-RPC for Javascript)" Homepage. It is a library implementing the <a href="http://www.xmlrpc.com/">XML-RPC</a> and <a href="https://www.jsonrpc.org">JSON-RPC</a> protocols, written in Javascript.<br/>
 It is designed for ease of use, flexibility and completeness.<br/>
 Above all, it mimics as closely as possible the API of the <a href="https://gggeek.github.io/phpxmlrpc/">PHPXMLRPC</a> library.<br/><br/>
-<b>Please note</b> that there is another, older javascript library named JSXMLRPC available on sf.net: <a href="https://sourceforge.net/projects/jsxmlrpc">http://sourceforge.net/projects/jsxmlrpc</a>. Both libraries share the same intents, but the code is completely unrelated (at least for now).
+<b>Please note</b> that there is another, older javascript library named JSXMLRPC available on sf.net: <a href="https://sourceforge.net/projects/jsxmlrpc">http://sourceforge.net/projects/jsxmlrpc</a>. Both libraries share the same intents, but the code is completely unrelated.
 </p>
 
 <h2><a name="download">Download</a></h2>
-Release 0.5 of php-xmlrpc sister-library <a href="https://github.com/gggeek/jsxmlrpc/releases/tag/0.5.0">is available here</a>.<br/>
-Please consider it is still marked as beta code when downloading and using it - even though all known reproducible bugs have been fixed.
+Release 0.6  the library <a href="https://github.com/gggeek/jsxmlrpc/releases/tag/0.6.0">is available here</a>.<br/>
+It can also be downloaded as NodeJS package from <a href="https://www.npmjs.com/package/@jsxmlrpc/jsxmlrpc">https://www.npmjs.com/package/@jsxmlrpc/jsxmlrpc</a>.
 <!--
 <p>The latest stable release is version <a href="https://sourceforge.net/project/showfiles.php?group_id=34455&amp;package_id=26601&amp;release_id=443018"><span class="evidence">2.1</span></a> released on August 28, 2006</p>
 <p>The previous stable release is version <a href="https://sourceforge.net/project/showfiles.php?group_id=34455&amp;package_id=26601&amp;release_id=355834"><span class="evidence">1.2.1</span></a> released on September 11, 2005</p>
@@ -42,6 +42,11 @@ More info on the vulnerabilities can be found <a href="#security">at the bottom 
 <ul>
 
 <li>
+    17th of December, 2022<br/>
+    Version 0.5 of the library has been released<br/><br/>
+</li>
+
+<li>
     29th of November, 2022<br/>
     Version 0.5 of the library has been released<br/><br/>
 </li>
@@ -50,7 +55,7 @@ More info on the vulnerabilities can be found <a href="#security">at the bottom 
     15th of December, 2013<br/>
     The project moved to GitHub<br/><br/>
 </li>
-
+<!--
 <li>
 5th of September, 2009.<br/>
 Version 0.4 of the library has been released. It is a bugfix release that solves many errors in all areas of encoding and decoding values. All users are encouraged to upgrade.<br/><br/>
@@ -89,21 +94,21 @@ Release notes are available <a href="https://sourceforge.net/project/shownotes.p
 26th of January, 2007.<br/>
 The homepage for the library has been uploaded on SourceForge, as well as a demo (beta) version of the debugger and visual editor.
 </li>
-
+-->
 </ul>
 
 <h2><a name="interest">Documentation</a></h2>
 <ul>
-<li>API documentation for version 0.3, in <a href="javadoc/">HTML format</a>, generated from comments in the code (ie. missing examples, release notes and lots of extra details, such as global variables...)</li>
+<li>API documentation for version 0.6, in <a href="doc/api/index.html">HTML format</a>, generated from comments in the code (ie. missing examples, release notes and lots of extra details, such as global variables...)</li>
 <!--<li>Documentation for version 2, in <a href="doc-2/">HTML</a> or <a href="doc-2/xmlrpc_php.pdf">PDF</a> format. For the adventurous amongst you there is even an <a href="doc-2/xmlrpc_php.xml">xml+css</a> version (note: better viewing results obtained by Firefox and Opera users)</li>
 <li><a href="doc-1.1/">Documentation for version 1.2.1</a></li>
 <li><a href="doc/">Documentation for version 1.0.99 (older)</a></li>-->
-<li>A manual with more deatils is <a href="doc/">also available</a></li>
+<li>A manual with more details is also available in <a href="doc/xmlrpc_js.html">html</a> and <a href="doc/xmlrpc_js.pdf">pdf</a> formats.</li>
 </ul>
 
 <h2><a name="debugger">Online xmlrpc debugger</a></h2>
 <p>A demo debugger application, built on top of this library, is active at the address <a href="debugger/debugger.html">https://gggeek.github.io/jsxmlrpc/debugger/debugger.html</a>.
-You can use the debugger to e.g. query the SF demo server (located at the address <b>http://phpxmlrpc.sourceforge.net/server.php</b>), or debug your own personal xmlrpc server, if it is accessible on the net.</p>
+You can use the debug your own personal xmlrpc server, as long as it is accessible on the neta dn supports CORS.</p>
 
 <h2><a name="development">Development</a></h2>
 <p><a href="https://github.com/gggeek/jsxmlrpc/">GitHub home page</a> (downloads, source code and bug tracker).</p>
@@ -117,7 +122,7 @@ For security related issues feel free to contact <a href="https://sourceforge.ne
 <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fgggeek.github.com%2Fjsxmlrpc%2F"><img
         src="http://www.w3.org/Icons/valid-xhtml10" height="31" width="88"
         alt="Valid XHTML 1.0!" /></a><br/>
-Page last updated: 2022/11/30
+Page last updated: 2022/12/17
 
 </div>
 </body>

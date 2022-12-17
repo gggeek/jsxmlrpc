@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gaetano Giunta" />
+  <title>JS-XMLRPC</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">JS-XMLRPC</h1>
+<p class="subtitle">version 0.6</p>
+<p class="author">Gaetano Giunta</p>
+<p class="date">XX 12 2012</p>
+</header>
+<h1>Introduction</h1>
+<p>This collection of Javascript classes provides a framework for writing XML-RPC and JSON-RPC clients.</p>
+<p>Main goals of the project are ease of use, flexibility and completeness. And of course, full API compatibility with the <a href="https://github.com/gggeek/phpxmlrpc">PHP-XMLRPC</a> library.</p>
+<p>XML-RPC is a format devised by <a href="http://www.userland.com/">Userland Software</a> for achieving remote procedure call via XML using HTTP as the transport. XML-RPC has its own web site, <a href="http://www.xmlrpc.com/">www.xmlrpc.com.</a></p>
+<p><a href="https://www.json.org/">JSON</a> is a format devised to ease serialization and deserialization of common data types without incurring the overhead that is normally associated with XML. It is a subset of the Javascript language, and as such it is easily manipulated within web browsers.</p>
+<p><a href="https://www.jsonrpc.org">JSON-RPC</a> is a remote procedure call protocol that uses HTTP for transport and a json syntax extremely similar to the xml-rpc one.</p>
+<p>Many thanks to the original author of the PHP-XMLRPC library: Edd Dumbill of <a href="http://usefulinc.com/">Useful Information Company</a>, to Jan-Klaas Kollhof for the Jsolait library and to the Yahoo! YUI team, for building such an incredible toolkit.</p>
+<h1>What's new</h1>
+<h2></h2>
+<p>For all releases after 0.4, see the release info on GitHub at <a href="https://github.com/gggeek/jsxmlrpc/releases">https://github.com/gggeek/jsxmlrpc/releases</a></p>
+<h2>version 0.4</h2>
+<ul>
+<li><p>added method setUserCredentials to xmlrpc_client, as the 'parent' php lib does in its latest version</p></li>
+<li><p>added support for the &lt;ex:nil/&gt; tag from the apache library, both in input and output (output regulated by the xmlrpc_null_apache_encoding variable, input by thexmlrpc_null_extension one)</p></li>
+<li><p>base64_decode now trims whitespace</p></li>
+<li><p>updated bundled yui to version 2.5.0</p></li>
+<li><p>fixed a bug in error log handler when using firefox+firebug</p></li>
+<li><p>fixed a bug in xmlrpc_decode with structs</p></li>
+<li><p>fixed a bug in parsing cookie headers in http responses</p></li>
+<li><p>allow lib to work in Windows Scripting Host environments</p></li>
+<li><p>added two demo files, for WSH and VB</p></li>
+</ul>
+<h2>version 0.3</h2>
+<ul>
+<li><p>A lot of bugs have been fixed in all areas of encoding and decoding xmlrpc values</p></li>
+<li><p>The debug and error logging mechanism has been rewritten, and will take advantage of Firebug when detected</p></li>
+<li><p>There is better support for Firefox when setting debug mode to clients, and for Safari when the port is not specified in the server url</p></li>
+<li><p>The function <code>wrap_xmlrpc_server</code> (from the original PHP api) has been implemented, and a couple of bugs fixed in <code>wrap_xmlrpc_method</code></p></li>
+</ul>
+<h2>version 0.2</h2>
+<ul>
+<li><p>client.send() supports async calls. In order to activate this functionality, pass a function as third parameter. Note that the timeout parameter only has effect in async calls.</p></li>
+<li><p>the <code>wrap_xmlrpc_method</code>() function is finally working. It makes the wrapping of remote webservicesinto native javascript functions (a.k.a. proxying) a snap</p></li>
+<li><p>the debugger can nowgenerate example code for invocation of remote methods</p></li>
+<li><p>minor assorted bugfixes, especially for Internet Explorer</p></li>
+<li><p>a minified (ie. compact) version of the library has been included in the distribution. It can be used instead of the standard version on webservers where bandwidth savings are important</p></li>
+<li><p>better documentation has been included in the distribution, most notably the (almost complete) API specification</p></li>
+</ul>
+<h2>version 0.1</h2>
+<p>Initial release of the library. Many "nice bits" are still missing (see <a href="#Chapter5">Chapter 5</a> below), but the basic encoding/decoding functionality should be ok.</p>
+<h1>System requirements</h1>
+<p>Any browser or Javascript host with support for ECMAScript 6 including XMLHttpRequest and DOMParser. That should include NodeJS version v12.20.0 or v14.13.0 or later and Chrome 61, Edge 16, Firefox 60, Opera 48, Safari 11, Chrome Android 108, Firefox for Android 107, Opera Mobile 72, Safari on iOS 11, Samsung Internet 8.2.</p>
+<p>Your mileage may vary on other browsers / javascript hosts.</p>
+<h1>Files in the distribution</h1>
+<ul>
+<li><p><code>lib/xmlrpc_lib.js</code>: the XML_RPC classes. This is the core library needed by all other files</p></li>
+<li><p><code>lib/jsonrpc_lib.js</code>: the JSON-RPC classes</p></li>
+<li><p><code>lib/xmlrpc_wrappers.js</code>: helper functions to "automagically" convert calls to remote webservices into javascript classes / functions</p></li>
+<li><p><code>lib/index.js</code>: this file contains all module exports from the 3 files listed above, making it easy to import everything from a single `import` line</p></li>
+<li><p><code>debugger/debugger.html</code>: a graphical webservice debugger</p></li>
+<li><p><code>debugger/visualeditor.html</code>, <code>debugger/visualeditor.css</code>, <code>debugger/xmlrpc_display.js</code>, <code>debugger/xmlrpc_tree.css</code>, plus all the other files (taken from the YUI distribution): visual editor component for creating arbitrarily nested xml-rpc/json-rpc values. It can be used as part of the js-xmlrpc debugger, as well as in the debugger that comes with the PHP-XMLRPC library or the docxmlrpcserver class part of phpxmlrpc/extras php package</p></li>
+<li><p><code>doc/xmlrpc_js.xml</code>: the docbook source file for this manual</p></li>
+<li><p><code>doc/manual/*.html</code>, <code>doc/manual/*.css</code>: this manual, in HTML format</p></li>
+<li><p><code>README.md</code>; <code>NEWS.md</code>: as the name implies, useful information bits</p></li>
+</ul>
+<h1>Known bugs and limitations</h1>
+<p>Missing functionality that is part of the PHP-XMLRPC library include: handling of charset encoding (where explicitly requested by the user); timeout in send() methods for the sync calls; compression of requests; handling of compression, chunked encoding in parseResponseHeaders (the response body is decoded correctly by the browser); encoding/decoding of anonymous js classes via an xml attribute (since it is hard to recover a class name, we could encode instead all methods as code); allow username/password auth be specified in URL when creating a client object; using client credentials for https auth</p>
+<p>Other: demo cases, reduce JSLint warnings, a testsuite and speed tests</p>
+<h1>Support</h1>
+<p>JS-XMLRPC is offered "as-is" without any warranty or commitment to support. However, informal advice and help is available via the JS-XMLRPC website.</p>
+<ul>
+<li><p>The <em>JS-XMLRPC</em> development is hosted on <a href="https://github.com/gggeek/jsxmlrpc">github.com/gggeek/jsxmlrpc</a>. Bugs, feature requests and patches can be posted to the <a href="https://github.com/gggeek/jsxmlrpc/issues">project's website</a>.</p></li>
+</ul>
+<h1>Class documentation</h1>
+<p>Where's the meat?</p>
+<p>Unfortunately, the documentation of the API exposed by the library has not (yet) really been integrated into the manual.</p>
+<p>Luckily, it is available in HTML format online at: <a href="???">...</a>. You can build it locally too if so inclined</p>
+<p>For more details, the manual that comes with the php-xmlrpc library might prove helpful: after all the two libraries share the exact same API (except for a handful of small quirks due to differences in the underlying language, detailed in Apendix A). It is available online at <a href="https://gggeek.github.io/phpxmlrpc/doc-2/">https://gggeek.github.io/phpxmlrpc/doc-2/</a></p>
+<h1>Known differences from the PHP-XMLRPC API</h1>
+<p>Although the library is designed to implent the same programming interfaces of the php-xmlrpc library, differences in the languages (javascript vs. pgp) and underlying platform (browser vs. php engine) prevent a complete match. This list details the known differences in the behaviour of the two libraries. Please note that most of the discrepancies deal with private members of objects, unusual usage patterns and little known corner cases, and are mostly of interest to people that wish to extend / modify the library rather than just use it.</p>
+<ul>
+<li><p>the internal, private structure of the xmlrpcval objects is slightly different</p></li>
+<li><p>xmlrpcresp.serialize() produces a complete xml chunk, including the xml prologue. In php-xmlrpc the prologue is omitted</p></li>
+<li><p>adding data to a struct value using the same keys of elements that already exist in the struct might produce different results</p></li>
+<li><p>xmlrpcresp objects have no private member 'content-type'</p></li>
+<li><p>the values of the global object 'xmlrpcTypes' (an array in php) differ (although the keys are the same)</p></li>
+<li><p>the method xmlrpcval::addScalar() does not coerce values to the appropriate type when declaring them as boolean</p></li>
+<li><p>the method xmlrpcmsg::parseResponse() can take a string as second parameter (which is assumed to be the full http response headers text)</p></li>
+<li><p>all classes have an init() constructor method (used for subclassing)</p></li>
+<li><p>when using a browser as javascript host, the client object by default inherits the browser settings with regard to http connections, eg. it can have keepalive ON, make use of HTTP 1.1 and will support receiving compressed content and content in many charsets (the browser taking care of the transcoding)</p></li>
+<li><p>the client object by default will send to the server any cookie received in previous requests. In php-xmlrpc all cookie handling has to be done by hand</p></li>
+<li><p>the client object does not support setting ssl certificates, proxies, ntlm authorization</p></li>
+<li><p>all output generated by the lib is performed by two functions: <code>xmlrpc_error_log</code> and <code>xmlrpc_debug_log</code> (for which the user can set up a message handler), whereas in php it is sent to stdout and stderr</p></li>
+<li><p>method names are case sensitive in javascript, and this lib respects camelCase convention</p></li>
+</ul>
+</body>
+</html>
