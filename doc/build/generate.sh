@@ -22,5 +22,5 @@ cd "$(dirname -- "$(dirname -- "$(dirname -- "${BASH_SOURCE[0]}")")")"
 #rm doc/build/xmlrpc_js.fo.xml
 
 # This toolchain works
-pandoc -s --from=docbook --to=html -o doc/xmlrpc_js.html xmlrpc_js.xml
+pandoc -s --from=docbook --to=html -o doc/xmlrpc_js.html doc/xmlrpc_js.xml
 pandoc -s --from=docbook --to=pdf -o doc/xmlrpc_js.pdf doc/xmlrpc_js.xml
