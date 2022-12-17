@@ -11,7 +11,7 @@ JS-XMLRPC User manual
   <subtitle>version 0.6</subtitle>
 
   <bookinfo>
-    <date>XX YYYY 2012</date>
+    <date>XX 12 2012</date>
 
     <author>
       <surname>Gaetano Giunta</surname>
@@ -25,37 +25,34 @@ JS-XMLRPC User manual
   <chapter>
     <title>Introduction</title>
 
-    <para>This collection of Javascript classes provides a framework for
-    writing XML-RPC and JSON-RPC clients.</para>
+    <para>This collection of Javascript classes provides a framework for writing XML-RPC and JSON-RPC clients.</para>
 
-    <para>Main goals of the project are ease of use, flexibility and
-    completeness. And of course, full API compatibility with the <ulink
-    url="https://github.com/gggeek/phpxmlrpc">PHP-XMLRPC</ulink> library.</para>
+    <para>Main goals of the project are ease of use, flexibility and completeness. And of course, full API compatibility
+    with the <ulink url="https://github.com/gggeek/phpxmlrpc">PHP-XMLRPC</ulink> library.</para>
 
-    <para>XML-RPC is a format devised by <ulink
-    url="http://www.userland.com/">Userland Software</ulink> for achieving
-    remote procedure call via XML using HTTP as the transport. XML-RPC has its
-    own web site, <ulink
+    <para>XML-RPC is a format devised by <ulink url="http://www.userland.com/">Userland Software</ulink> for achieving
+    remote procedure call via XML using HTTP as the transport. XML-RPC has its own web site, <ulink
     url="http://www.xmlrpc.com/">www.xmlrpc.com.</ulink></para>
 
-    <para><ulink url="???">JSON</ulink> is a format devised to ease
-    serialization and deserialization of common data types without incurring
-    the overhead that is normally associated with XML. It is a subset of the
-    Javascript language, and as such it is easily manipulated within web
-    browsers.</para>
+    <para><ulink url="https://www.json.org/">JSON</ulink> is a format devised to ease serialization and deserialization
+    of common data types without incurring the overhead that is normally associated with XML. It is a subset of the
+    Javascript language, and as such it is easily manipulated within web browsers.</para>
 
-    <para><ulink url="http://www.jsonrpc.org">JSON-RPC</ulink> is a remote
-    procedure call protocol that uses HTTP for transport and a json syntax
-    extremely similar to the xml-rpc one.</para>
+    <para><ulink url="https://www.jsonrpc.org">JSON-RPC</ulink> is a remote procedure call protocol that uses HTTP for
+    transport and a json syntax extremely similar to the xml-rpc one.</para>
 
-    <para>Many thanks to the original author of the PHP-XMLRPC library: Edd
-    Dumbill of <ulink url="http://usefulinc.com/">Useful Information
-    Company</ulink>, to Jan-Klaas Kollhof for the Jsolait library and to the
-    Yahoo! YUI team, for building such an incredible toolkit.</para>
+    <para>Many thanks to the original author of the PHP-XMLRPC library: Edd Dumbill of <ulink
+    url="http://usefulinc.com/">Useful Information Company</ulink>, to Jan-Klaas Kollhof for the Jsolait library and to
+    the Yahoo! YUI team, for building such an incredible toolkit.</para>
   </chapter>
 
   <chapter>
     <title>What's new</title>
+
+    <sect1>
+      <para>For all releases after 0.4, see the release info on GitHub at <ulink
+      url="https://github.com/gggeek/jsxmlrpc/releases">https://github.com/gggeek/jsxmlrpc/releases</ulink></para>
+    </sect1>
 
     <sect1>
       <title>version 0.4</title>
@@ -187,14 +184,11 @@ JS-XMLRPC User manual
   <chapter>
     <title>System requirements</title>
 
-    <para>The library has been tested on Internet Explorer versions 6 and 7,
-    Firefox 2.0 and Opera 9 and Safari 3 beta, plus Windows Script Host
-    5.6.</para>
+    <para>Any browser or Javascript host with support for ECMAScript 6 including XMLHttpRequest and DOMParser. That
+    should include NodeJS version v12.20.0 or v14.13.0 or later and Chrome 61, Edge 16, Firefox 60, Opera 48, Safari 11,
+    Chrome Android 108, Firefox for Android 107, Opera Mobile 72, Safari on iOS 11, Samsung Internet 8.2.</para>
 
     <para>Your mileage may vary on other browsers / javascript hosts.</para>
-
-    <para>The XMLHttpRequest object is used by the client component to send
-    http requests to servers, so it is definitely a must-have.</para>
   </chapter>
 
   <chapter>
@@ -207,133 +201,75 @@ JS-XMLRPC User manual
         </listitem>
 
         <listitem>
-          <para><filename>lib/jsonrpc_lib.js</filename>: the JSON-RPC classes.
-          Include this to enable suppor for JSON-RPC</para>
+          <para><filename>lib/jsonrpc_lib.js</filename>: the JSON-RPC classes</para>
         </listitem>
 
         <listitem>
-          <para><filename>lib/xmlrpc_wrappers.js</filename>: helper functions
-          to "automagically" convert calls to remote webservices into
-          javascript classes / functions</para>
+          <para><filename>lib/xmlrpc_wrappers.js</filename>: helper functions to "automagically" convert calls to remote
+          webservices into javascript classes / functions</para>
         </listitem>
 
         <listitem>
-          <para><filename>lib/jsxmlrpc-min.js</filename>: this file contains
-          the 3 files listed above, stripped of all comments, whitespace and
-          indentation and glued together. It is provided as a commodity for
-          deployment on webserver setups where download bandwidth and latency
-          are important</para>
+          <para><filename>lib/index.js</filename>: this file contains all module exports from the 3 files listed above,
+          making it easy to import everything from a single `import` line</para>
         </listitem>
 
         <listitem>
-          <para><filename>debugger/debugger.html</filename>: a graphical
-          webservice debugger</para>
+          <para><filename>debugger/debugger.html</filename>: a graphical webservice debugger</para>
         </listitem>
 
         <listitem>
           <para><filename>debugger/visualeditor.html</filename>,
           <filename>debugger/visualeditor.css</filename>,
           <filename>debugger/xmlrpc_display.js</filename>,
-          <filename>debugger/xmlrpc_tree.css</filename>, plus all the other
-          files (taken from the YUI distribution): visual editor component for
-          creating arbitrarily nested xml-rpc/json-rpc values. It can be used
-          as part of the js-xmlrpc debugger, as well as in the debugger that
-          comes with the PHP-XMLRPC library or the docxmlrpcserver class part
-          of PHP-XMLRPC EXTRAS</para>
+          <filename>debugger/xmlrpc_tree.css</filename>, plus all the other files (taken from the YUI distribution):
+          visual editor component for creating arbitrarily nested xml-rpc/json-rpc values. It can be used as part of the
+          js-xmlrpc debugger, as well as in the debugger that comes with the PHP-XMLRPC library or the docxmlrpcserver
+          class part of phpxmlrpc/extras php package</para>
         </listitem>
 
         <listitem>
-          <para><filename>doc/xmlrpc_js.xml</filename>: the docbook source
-          file for this manual</para>
+          <para><filename>doc/xmlrpc_js.xml</filename>: the docbook source file for this manual</para>
         </listitem>
 
         <listitem>
-          <para><filename>doc/*.html</filename>,
-          <filename>doc/*.css</filename>: this manual, in HTML format</para>
+          <para><filename>doc/manual/*.html</filename>,
+          <filename>doc/manual/*.css</filename>: this manual, in HTML format</para>
         </listitem>
 
         <listitem>
-          <para><filename>README</filename>; <filename>NEWS</filename>,
-          <filename>Changelog.txt</filename>: as the name implies, useful
+          <para><filename>README.md</filename>; <filename>NEWS.md</filename>: as the name implies, useful
           information bits</para>
         </listitem>
 
-        <listitem>
-          <para><filename>Makefile</filename>,
-          <filename>doc/makefile</filename>: make scripts used to package the
-          library for distribution, and optionally, to install the packaged
-          version on target servers</para>
-        </listitem>
       </itemizedlist></para>
   </chapter>
 
   <chapter>
     <title id="Chapter5">Known bugs and limitations</title>
 
-    <para>WARNING: the code used to parse json-rpc messages is based on usage
-    the <function>eval()</function> javascript function, and does virtually no
-    type checking. As such it is extremely prone to javascript code injection,
-    and should only be used to communicate with webservices you absolutely
-    trust.</para>
+    <para>Missing functionality that is part of the PHP-XMLRPC library include: handling of charset encoding (where
+    explicitly requested by the user); timeout in send() methods for the sync calls; compression of requests; handling
+    of compression, chunked encoding in parseResponseHeaders (the response body is decoded correctly by the browser);
+    encoding/decoding of anonymous js classes via an xml attribute (since it is hard to recover a class name, we could
+    encode instead all methods as code); allow username/password auth be specified in URL when creating a client object;
+    using client credentials for https auth</para>
 
-    <para>Missing functionality that is part of the PHP-XMLRPC library
-    include: handling of charset encoding (where explicitly requested by the
-    user); timeout in send() methods for the sync calls; compression of
-    requests; handling of compression, chunked encoding in
-    parseResponseHeaders (the response body is decoded correctly by the
-    browser); encoding/decoding of anonymous js classes via an xml attribute
-    (since it is hard to recover a class name, we could encode instead all
-    methods as code); allow username/password auth be specified in URL when
-    creating a client object; using client credentials for https auth</para>
-
-    <para>Other: demo cases, reduce JSLint warnings, a testsuite and speed
-    tests</para>
+    <para>Other: demo cases, reduce JSLint warnings, a testsuite and speed tests</para>
   </chapter>
 
   <chapter>
     <title>Support</title>
 
-    <para>JS-XMLRPC for PHP is offered "as-is" without any warranty or
-    commitment to support. However, informal advice and help is available via
-    the JS-XMLRPC website and the PHP-XMLRPC mailing list.</para>
+    <para>JS-XMLRPC is offered "as-is" without any warranty or  commitment to support. However, informal advice and help
+    is available via the JS-XMLRPC website.</para>
 
     <itemizedlist>
       <listitem>
-        <para>The <emphasis>JS-XMLRPC</emphasis> development is hosted on
-        <ulink
-        url="https://github.com/gggeek/jsxmlrpc">github.com/gggeek/jsxmlrpc</ulink>.
-        Bugs, feature requests and patches can be posted to the <ulink
-        url="https://github.com/gggeek/phpxmlrpc/issues">project's
-        website</ulink>.</para>
+        <para>The <emphasis>JS-XMLRPC</emphasis> development is hosted on <ulink
+        url="https://github.com/gggeek/jsxmlrpc">github.com/gggeek/jsxmlrpc</ulink>.  Bugs, feature requests and patches
+        can be posted to the <ulink url="https://github.com/gggeek/jsxmlrpc/issues">project's website</ulink>.</para>
       </listitem>
-
-      <listitem>
-        <para>The <emphasis>PHP XML-RPC interest mailing list</emphasis> is
-        run by the author. More details <ulink
-        url="http://lists.gnomehack.com/mailman/listinfo/phpxmlrpc">can be
-        found here</ulink>.</para>
-      </listitem>
-
-      <listitem>
-        <para>For more general XML-RPC questions, there is a Yahoo! Groups
-        <ulink url="http://groups.yahoo.com/group/xml-rpc/">XML-RPC mailing
-        list</ulink>.</para>
-      </listitem>
-
-      <listitem>
-        <para>The <ulink
-        url="http://www.xmlrpc.com/discuss">XML-RPC.com</ulink> discussion
-        group is a useful place to get help with using XML-RPC. This group is
-        also gatewayed into the Yahoo! Groups mailing list.</para>
-      </listitem>
-
-      <listitem>
-        <para>On Yahoo! Groups you can find a mailing list dedicated to <ulink
-        url="http://tech.groups.yahoo.com/group/json/">JSON</ulink>, and one
-        to <ulink
-        url="http://tech.groups.yahoo.com/group/json-rpc/">JSON-RPC</ulink>.</para>
-      </listitem>
-    </itemizedlist>
   </chapter>
 
   <chapter>
@@ -344,103 +280,86 @@ JS-XMLRPC User manual
     <para>Unfortunately, the documentation of the API exposed by the library
     has not (yet) really been integrated into the manual.</para>
 
-    <para>Luckily, it is available in HTML format as part of the distribution:
-    just look for the <ulink url="???">doc/api</ulink> directory.</para>
+    <para>Luckily, it is available in HTML format online at: <ulink url="???">...</ulink>. You can build it locally
+    too if so inclined</para>
 
-    <para>For more details, the manual that comes with the php-xmlrpc library
-    might prove helpful: after all the two libraries share the exact same API
-    (except for a handful of small quirks due to differences in the underlying
+    <para>For more details, the manual that comes with the php-xmlrpc library might prove helpful: after all the two
+    libraries share the exact same API (except for a handful of small quirks due to differences in the underlying
     language, detailed in Apendix A). It is available online at <ulink
-    url="http://gggeek.github.io/phpxmlrpc/doc-2/">http://gggeek.github.io/phpxmlrpc/doc-2/</ulink></para>
+    url="https://gggeek.github.io/phpxmlrpc/doc-2/">https://gggeek.github.io/phpxmlrpc/doc-2/</ulink></para>
   </chapter>
 
   <appendix>
     <title>Known differences from the PHP-XMLRPC API</title>
 
-    <para>Although the library is designed to implent the same programming
-    interfaces of the php-xmlrpc library, differences in the languages
-    (javascript vs. pgp) and underlying platform (browser vs. php engine)
-    prevent a complete a match. This list details the known differences in the
-    behaviour of the two libraries. Please note that most of the discrepancies
-    deal with private members of objects, unusual usage patterns and little
-    known coner cases, and are mostly of interest to people that wish to
-    extend / modify the library rather than just use it.</para>
+    <para>Although the library is designed to implent the same programming interfaces of the php-xmlrpc library,
+    differences in the languages (javascript vs. pgp) and underlying platform (browser vs. php engine) prevent a complete
+    match. This list details the known differences in the behaviour of the two libraries. Please note that most of the
+    discrepancies deal with private members of objects, unusual usage patterns and little known corner cases, and are
+    mostly of interest to people that wish to extend / modify the library rather than just use it.</para>
 
     <para><itemizedlist>
         <listitem>
-          <para>the internal, private structure of the xmlrpcval objects is
-          slightly different</para>
+          <para>the internal, private structure of the xmlrpcval objects is slightly different</para>
         </listitem>
 
         <listitem>
-          <para>xmlrpcresp.serialize() produces a complete xml chunk,
-          including the xml prologue. In php-xmlrpc the prologue is
-          omitted</para>
+          <para>xmlrpcresp.serialize() produces a complete xml chunk, including the xml prologue. In php-xmlrpc the
+          prologue is omitted</para>
         </listitem>
 
         <listitem>
-          <para>adding data to a struct value using the same keys of elements
-          that already exist in the struct might produce different
-          results</para>
+          <para>adding data to a struct value using the same keys of elements that already exist in the struct might
+          produce different results</para>
         </listitem>
 
         <listitem>
-          <para>xmlrpcresp objects have no private member
-          'content-type'</para>
+          <para>xmlrpcresp objects have no private member 'content-type'</para>
         </listitem>
 
         <listitem>
-          <para>the values of the global object 'xmlrpcTypes' (an array in
-          php) differ (although the keys are the same)</para>
+          <para>the values of the global object 'xmlrpcTypes' (an array in php) differ (although the keys are the same)
+          </para>
         </listitem>
 
         <listitem>
-          <para>the method <methodname>xmlrpcval::addScalar()</methodname>
-          does not coerce values to the appropriate type when declaring them
-          as boolean</para>
+          <para>the method <methodname>xmlrpcval::addScalar()</methodname> does not coerce values to the appropriate
+          type when declaring them as boolean</para>
         </listitem>
 
         <listitem>
-          <para>the method <methodname>xmlrpcmsg::parseResponse()</methodname>
-          can take a string as second parameter (which is assumed to be the
-          full http response headers text)</para>
+          <para>the method <methodname>xmlrpcmsg::parseResponse()</methodname> can take a string as second parameter
+          (which is assumed to be the full http response headers text)</para>
         </listitem>
 
         <listitem>
-          <para>all classes have an <methodname>init()</methodname>
-          constructor method (used for subclassing)</para>
+          <para>all classes have an <methodname>init()</methodname> constructor method (used for subclassing)</para>
         </listitem>
 
         <listitem>
-          <para>when using a browser as javascript host, the client object by
-          default inherits the browser settings with regard to http
-          connections, eg. it can have keepalive ON, make use of HTTP 1.1 and
-          will support receiving compresssed content and content in many
-          charsets (the browser taking care of the transcoding)</para>
+          <para>when using a browser as javascript host, the client object by default inherits the browser settings with
+          regard to http connections, eg. it can have keepalive ON, make use of HTTP 1.1 and will support receiving
+          compressed content and content in many charsets (the browser taking care of the transcoding)</para>
         </listitem>
 
         <listitem>
-          <para>the client object by default will send to the server any
-          cookie received in previous requests. In php-xmlrpc all cookie
-          handling has to be done by hand</para>
+          <para>the client object by default will send to the server any cookie received in previous requests. In
+          php-xmlrpc all cookie handling has to be done by hand</para>
         </listitem>
 
         <listitem>
-          <para>the client object does not support setting ssl certificates,
-          proxies, ntlm authorization</para>
+          <para>the client object does not support setting ssl certificates, proxies, ntlm authorization</para>
         </listitem>
 
         <listitem>
           <para>all output generated by the lib is performed by two functions:
           <function>xmlrpc_error_log</function> and
-          <function>xmlrpc_debug_log</function> (for which the user can set up
-          a message handler), whereas in php it is sent to stdout and
-          stderr</para>
+          <function>xmlrpc_debug_log</function> (for which the user can set up a message handler), whereas in php it
+          is sent to stdout and stderr</para>
         </listitem>
 
         <listitem>
-          <para>method names are case sensitive in javascript, and this lib
-          respects camelCase convention</para>
+          <para>method names are case sensitive in javascript, and this lib respects camelCase convention</para>
         </listitem>
       </itemizedlist></para>
   </appendix>
