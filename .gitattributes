@@ -1,5 +1,6 @@
 # For the moment at least, we keep the doc-building toolchain in the tarball gotten from github
 
+/build/** export-ignore
 /.editorconfig export-ignore
 /.gitattributes export-ignore
 /.github/** export-ignore
@@ -7,4 +8,4 @@
 /.npmignore export-ignore
 /build/** export-ignore
 #/doc/build/** export-ignore
-/postcss.config.js export-ignore
+/postcss.config.cjs export-ignore

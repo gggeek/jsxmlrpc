@@ -6,13 +6,14 @@
 /.gitignore
 /.idea
 /.npmignore
+/build
 /doc/api
 /doc/build
 /doc/Changelog.txt
 /doc/xmlrpc_js.html
 /doc/xmlrpc_js.pdf
 /node_modules
-/postcss.config.js
+/postcss.config.cjs
 
 /todo.txt
 /var

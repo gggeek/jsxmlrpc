@@ -30,6 +30,7 @@ done
 
 # minify the debugger css files
 # @todo test if this is safe - fe. it nukes container.css...
+#       Also: minify the files in doc/dockbook-css
 #for FILE in $(ls debugger/*.css)
 #do
 #    mv "${FILE}" "${FILE}.mcss"
