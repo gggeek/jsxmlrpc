@@ -7,4 +7,4 @@
 /.npmignore export-ignore
 /build/** export-ignore
 #/doc/build/** export-ignore
-/gulpfile.js export-ignore
+/postcss.config.js export-ignore

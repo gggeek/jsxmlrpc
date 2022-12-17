@@ -12,7 +12,10 @@
     "xhr2": "*"
   },
   "devDependencies": {
+    "cssnano": "*",
     "jsdoc": "*",
+    "postcss": "*",
+    "postcss-cli": "*",
     "uglify-js": "*"
   },
   "type": "module",

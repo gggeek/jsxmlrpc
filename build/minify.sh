@@ -28,4 +28,11 @@ do
     rm "${FILE}.mjs"
 done
 
-# @todo minify the debugger css files
+# minify the debugger css files
+# @todo test if this is safe - fe. it nukes container.css...
+#for FILE in $(ls debugger/*.css)
+#do
+#    mv "${FILE}" "${FILE}.mcss"
+#    ./node_modules/.bin/postcss "${FILE}.mcss" > "${FILE}"
+#    rm "${FILE}.mcss"
+#done
