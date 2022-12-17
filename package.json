@@ -13,8 +13,7 @@
   },
   "devDependencies": {
     "jsdoc": "*",
-    "uglify-js": "*",
-    "xslt3": "*"
+    "uglify-js": "*"
   },
   "type": "module",
   "main": "lib/index.js",
