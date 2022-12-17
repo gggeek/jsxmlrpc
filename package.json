@@ -25,7 +25,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "minify": "./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/jsonrpc_lib.min.js --source-map \"url='./jsonrpc_lib.min.js.map'\" -- lib/jsonrpc_lib.js; ./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/xmlrpc_lib.min.js --source-map \"url='./xmlrpc_lib.min.js.map'\" -- lib/xmlrpc_lib.js; ./node_modules/.bin/uglifyjs --compress --module --ie --v8 --webkit -o lib/xmlrpc_wrappers.min.js --source-map \"url='./xmlrpc_wrappers.min.js.map'\" -- lib/xmlrpc_wrappers.js",
+    "minify": "./build/minify.sh",
     "doc": "./doc/build/setup_tools.sh && ./doc/build/generate.sh"
   },
   "homepage": "http://gggeek.github.io/jsxmlrpc/",

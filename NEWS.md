@@ -1,4 +1,4 @@
-## JS-XMLRPC version 0.6 - unreleased
+## JS-XMLRPC version 0.6.0 - 2022/12/17
 
 * BREAKING CHANGE: transformed the library in an ES6 module, available as NPM package "@jsxmlrpc/jsxmlrpc".
 
