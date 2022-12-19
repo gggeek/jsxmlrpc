@@ -1,3 +1,9 @@
+## JS-XMLRPC version 0.6.1 - 2022/12/19
+
+* fixed: `base64_encode('')` returns an empty string on all environments
+* improvement: `visualeditor.html?params=` will not preload the dialog with an empty parameter
+
+
 ## JS-XMLRPC version 0.6.0 - 2022/12/17
 
 * BREAKING CHANGE: transformed the library in an ES6 module, available as NPM package "@jsxmlrpc/jsxmlrpc".
