@@ -1,6 +1,11 @@
+## JS-XMLRPC version 0.6.2 - 2022/12/20
+
+* fixed: `visualeditor.html` had stopped producing json parameters when requested (issue introduced in 0.6)
+
+
 ## JS-XMLRPC version 0.6.1 - 2022/12/19
 
-* fixed: `base64_encode('')` returns an empty string on all environments
+* fixed: `base64_encode('')` now returns an empty string on all environments
 * improvement: `visualeditor.html?params=` will not preload the dialog with an empty parameter
 
 
