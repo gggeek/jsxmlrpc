@@ -34,7 +34,7 @@ if (window.location.search.search(/type=jsonrpc/) != -1)
 {
     var type = 'jsonrpc';
     var valid_types = {'string':1, 'null':9, 'double':5, 'boolean':6};
-    for(var i = 0; i < params.length; ++i)
+    for (var i = 0; i < params.length; ++i)
     {
         if (params[i].search(/^(i4|int)$/) != -1)
         {
@@ -89,8 +89,9 @@ window.xmlrpcval = xmlrpcval;
 window.xmlrpc_encode_entities = xmlrpc_encode_entities;
 
 // set up jsxmlrpc lib display options
-askDeleteConfirmation = true;
-editElementDiv = 'dlgpanel';
+window.askDeleteConfirmation = true;
+window.editElementDiv = 'dlgpanel';
+
 if (type == 'jsonrpc')
 {
     var elementType = 'jsonrpcval';
@@ -104,6 +105,8 @@ else
 if (!noadd)
     allowTopLevelElementTypeChange = true;
 
+window.elementType = elementType;
+
 var trees = [];
 var nodes = [];
 var previewDlg = null;
@@ -115,9 +118,9 @@ window.treeInit = function()
 
     var ptype;
     document.getElementById('valuepanel').innerHTML = '';
-    for(var i = 0; i < params.length; ++i)
+    for (var i = 0; i < params.length; ++i)
         document.getElementById('valuepanel').innerHTML += '<li id="param'+i+'" class="paramdiv"></li>\n';
-    for(i = 0; i < params.length; ++i)
+    for (i = 0; i < params.length; ++i)
     {
         ptype = params[i].toLowerCase();
         trees[i] = new YAHOO.widget.TreeView('param'+i);
@@ -168,7 +171,7 @@ function buildthem()
         trees[i].draw();
         if (type == 'jsonrpc')
         {
-            /// @todo use an array and implode() here? it wouldbe cleaner...
+            /// @todo use an array and implode() here? it would be cleaner...
             out += root.data.serialize()+',\n';
         }
         else
@@ -195,7 +198,7 @@ function hidePreviewDlg()
 
 window.preview = function()
 {
-    if (nodes.length == 0)
+    if (nodes.length === 0)
         alert('No parameters to be serialized');
     else
     {
