@@ -4,7 +4,7 @@ JS-XMLRPC
 DESCRIPTION
 -----------
 
-A javascript library for building xmlrpc and jsonrpc clients.
+A javascript library for building xml-rpc and json-rpc clients.
 
 REQUIREMENTS
 ------------
@@ -14,6 +14,11 @@ REQUIREMENTS
 
 (*) = according to caniuse.com, that includes at least: Chrome 61, Edge 16, Firefox 60, Opera 48, Safari 11, Chrome
     Android 108, Firefox for Android 107, Opera Mobile 72, Safari on iOS 11, Samsung Internet 8.2
+
+KNOWN LIMITATIONS
+-----------------
+
+Only json-rpc protocol version 1.0 is supported.
 
 INSTALLATION
 ------------
@@ -37,7 +42,7 @@ Then, in your code, add:
 USAGE / API DOCUMENTATION
 -------------------------
 
-HTML documentation can be found in the doc/ directory. The manual ([xmlrpc_js.xml](doc/xmlrpc_js.xml)) is "xml file
+HTML documentation can be found in the doc/ directory. The manual ([xmlrpc_js.xml](doc/xmlrpc_js.xml)) is in "xml file
 with stylesheets" format: it can be viewed perfectly with a web browser.
 
 A couple of sample files can be found in the demo/ directory.
