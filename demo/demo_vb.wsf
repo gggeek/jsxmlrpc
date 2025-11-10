@@ -29,7 +29,7 @@
   <script language="VBScript">
     ' Get a state name given its number
     stateno = 33
-    Set client = create_xmlrpc_client("https://gggeek.altervista.org/sw/xmlrpc/demo/server/server.php")
+    Set client = create_xmlrpc_client("https://tanoconsulting.com/sw/xmlrpc/demo/server/server.php")
     For stateno = 1 To 51
       Set msg = create_xmlrpcmsg("examples.getStateName")
       msg.addParam(xmlrpc_encode(stateno))

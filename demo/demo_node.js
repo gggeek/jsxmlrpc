@@ -1,6 +1,6 @@
 import {xmlrpc_client, xmlrpcmsg} from '@jsxmlrpc/jsxmlrpc';
 
-let client = new xmlrpc_client('https://gggeek.altervista.org/sw/xmlrpc/demo/server/server.php');
+let client = new xmlrpc_client('https://tanoconsulting.com/sw/xmlrpc/demo/server/server.php');
 let msg = new xmlrpcmsg('system.listMethods', []);
 client.setDebug(2);
 // only async calls are supported by xhr2

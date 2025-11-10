@@ -1,3 +1,8 @@
+## JS-XMLRPC version 0.XXX - unreleased
+
+* improved: moved target demo servers to be the ones hosted on tanoconsulting.com rather than altervista.org
+
+
 ## JS-XMLRPC version 0.6.2 - 2022/12/20
 
 * fixed: `visualeditor.html` had stopped producing json parameters when requested (issue introduced in 0.6)

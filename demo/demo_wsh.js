@@ -23,7 +23,7 @@ source = source.replace(/ polyfills [\s\S]+ global variables/, '');
 /// @todo other features we need to fix: usage of default function arguments, possibly get/set
 eval(source);
 
-var client = new xmlrpc_client('https://gggeek.altervista.org/sw/xmlrpc/demo/server/server.php');
+var client = new xmlrpc_client('https://tanoconsulting.com/sw/xmlrpc/demo/server/server.php');
 var msg = new xmlrpcmsg('system.listMethods', []);
 client.setDebug(2);
 var resp = client.send(msg);
